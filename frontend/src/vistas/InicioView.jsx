@@ -1,21 +1,35 @@
 
 import { Footer } from "../componentes/Footer"
-import data from "../data/data"
+// import data from "../data/data"
+import axios from "axios";
 import { Box, Typography, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TarjetaProducto from "../componentes/TarjetaProducto";
+import { useState, useEffect } from "react";
+
 
 
 export const InicioView = () => {
 
+  const [producto, setProducto] = useState([]);
+  useEffect(()=>{
+    const fetchData = async () => {
+      const respuesta = await axios.get("/api/productos")
+     
+      setProducto(respuesta.data)
+    };
+    fetchData();
+  }, []);
+
+
+
   const navegar = useNavigate();
   const goNavegar =(e)=>{
-    //data.producto.map(producto=>(console.log(e.target)))
+    
     let atributo = e.currentTarget.getAttribute("txtproducto");
     console.log(atributo);
     navegar(`/producto/${atributo}`)
-    //console.log(data.producto[0].txtProduct);
-    // console.log(e.currentTarget.getAttribute("txtproducto"));
+    
   }
 
   return ( 
@@ -29,7 +43,7 @@ export const InicioView = () => {
         sx={{ 
         justifyContent: 'space-around'}} >
            {
-      data.producto.map(producto=>(
+      producto.map(producto=>(
         <Grid item m={2} key={producto.txtProduct}  >
             <TarjetaProducto
             txtProducto={producto.txtProduct}
