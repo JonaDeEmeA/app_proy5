@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar } from './componentes/Navbar';
 import {InicioView} from "./vistas/InicioView"
 import { ProductoView } from './vistas/ProductoView';
+import { Footer } from "./componentes/Footer"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/producto/:txtProduct" element={<ProductoView />} />
     
     </Routes>
+    <Footer />
     </>
   );
 }

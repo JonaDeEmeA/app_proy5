@@ -1,4 +1,5 @@
 
+import Calificacion from "./Calificacion"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,7 +11,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export default function TarjetaProducto(props) {
 
-
+  
 
 
   return (
@@ -26,6 +27,7 @@ export default function TarjetaProducto(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.producto}
           </Typography>
+          <Calificacion />
           <Typography variant="body2" color="text.secondary">
             {props.valor}
           </Typography>

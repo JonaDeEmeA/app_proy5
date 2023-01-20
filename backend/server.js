@@ -6,8 +6,16 @@ const app = express();
 
 
 app.get("/api/productos", (req, res)=>{
-  
   res.send(data.producto);
+});
+
+app.get("/api/producto/:item", (req, res)=>{
+  const producto = data.producto.find(e => e.txtProduct === req.params.item);
+  if (producto) {
+    res.send(producto);
+  } else {
+    res.status(404).send({message: "Producto no encontrado"})
+  };
 });
 
 const puerto = process.env.PORT || 5000;
