@@ -27,7 +27,7 @@ export default function TarjetaProducto(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.producto}
           </Typography>
-          <Calificacion />
+          <Calificacion numVistas={props.numVistas}/>
           <Typography variant="body2" color="text.secondary">
             {props.valor}
           </Typography>

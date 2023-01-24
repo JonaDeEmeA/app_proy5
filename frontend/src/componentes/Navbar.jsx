@@ -6,6 +6,7 @@ import { red } from '@mui/material/colors';
 
 import {MuiMenu } from "./Menu"
 import {TabMenu } from "./TabMenu"
+import {Carro } from "./Carro"
 
 
 export const Navbar = () => {
@@ -21,7 +22,7 @@ export const Navbar = () => {
             <Toolbar  >
                 <MuiMenu />
                 <TabMenu />
-               
+                <Carro />
                 <Typography sx={{width:"100%", textAlign:{sx:"left", md:"right"}}}   variant="h6" component="div" >
                     Proyecto5_UDD - eCommerce
                 </Typography>

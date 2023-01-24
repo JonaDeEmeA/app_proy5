@@ -6,8 +6,8 @@ const data = {
       category: "Mantequillas",
       image: "https://jonadeemea.github.io/Kymani_landing/img/100mani.jpg",
       price: 6000,
-      inStock: 20,
-      rating: 4.5,
+      inStock: 15,
+      rating: 5,
       description: "Mantequilla de mani 100% maní, alto aporte proteico para regenerar masa muscular 💪🏻 🔥"
     },
     {

@@ -4,7 +4,9 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-export default function BasicRating() {
+export default function Calificacion({numRating}) {
+
+  
   const [value, setValue] = useState(2);
 
   return (
@@ -21,6 +23,7 @@ export default function BasicRating() {
           setValue(newValue);
         }}
       />
+      <span>{numRating} Opiniones </span>
       {/* <Typography component="legend">Read only</Typography>
       <Rating name="read-only" value={value} readOnly />
       <Typography component="legend">Disabled</Typography>
