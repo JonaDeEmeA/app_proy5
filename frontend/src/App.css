@@ -9,6 +9,16 @@ body{
 }
 
 .large-img{
-  max-width: 40vh;
+
+  
+  width: 100%;
+  height: 300px;
+  
+  object-fit:cover;
+  
+  
+  
+  
+  
 }
 
