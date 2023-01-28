@@ -35,11 +35,28 @@ app.get("/api/users", (req, res)=>{
 });
 
 app.get("/api/productos", (req, res)=>{
-  
   res.send(data.producto);
 });
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message});
+});
+
+app.get("/api/producto/:item", (req, res)=>{
+  const producto = data.producto.find(e => e.txtProduct === req.params.item);
+  if (producto) {
+    res.send(producto);
+  } else {
+    res.status(404).send({message: "Producto no encontrado"})
+  };
+});
+
+app.get("/api/productos/:id", (req, res)=>{
+  const producto = data.producto.find(e => e._id === req.params.id);
+  if (producto) {
+    res.send(producto);
+  } else {
+    res.status(404).send({message: "Producto no encontrado"})
+  };
 });
 
 const puerto = process.env.PORT || 5000;
