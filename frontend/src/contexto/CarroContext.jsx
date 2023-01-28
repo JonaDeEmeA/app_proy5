@@ -9,19 +9,40 @@ const initialState = {
 } ;
 
 const reducer=(state, action)=>{
+ // console.log(action.payload);
   switch (action.type) {
     case "ADD_ITEM_CARRO":
       //agrega un item nuevo al carro
-      return{...state, 
-        carro:{...state.carro, 
-          carroItems:[...state.carro.carroItems, action.datos]
-        },
-      };
+      
+     const itemNuevo = action.payload;
+      console.log(`largo: ${state.carro.carroItems.length}`);
+
+      const itemExsite =  state.carro.carroItems.find(
+        item => item._id === itemNuevo._id 
+      ) ;
+        //itemsCarro
+      const carroItems = itemExsite ? state.carro.carroItems.map(
+        (item) => item._id === itemExsite._id ? itemNuevo : item
+      ) : [...state.carro.carroItems, itemNuevo];
+
+      console.log(`else: ${carroItems}`);
+
+     
+    return {...state, carro: {...state.carro, carroItems}}; 
+
+   
+ 
+    
+       
   
     default: 
       return state;
+
+      
   }
 }
+
+
 
 export const CarroProvider=(props)=>{
   const [state, dispatch] =  useReducer(reducer, initialState);

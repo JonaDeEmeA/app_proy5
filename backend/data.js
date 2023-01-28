@@ -1,6 +1,7 @@
 const data = {
   producto: [
     {
+      _id: "1",
       name: "100% Mani",
       txtProduct: "manteqilla-100-mani",
       category: "Mantequillas",
@@ -11,6 +12,7 @@ const data = {
       description: "Mantequilla de mani 100% maní, alto aporte proteico para regenerar masa muscular 💪🏻 🔥"
     },
     {
+      _id: "2",
       name: "Chip chocolate",
       txtProduct: "manteqilla-chip-chocolate",
       category: "Mantequillas",
@@ -21,6 +23,7 @@ const data = {
       description: "Mantequilla de maní con chip de chocolate, alto aporte energético del bueno🔥"
     },
     {
+      _id: "3",
       name: "100% Avellana",
       txtProduct: "manteqilla-100-avellana",
       category: "Mantequillas",
@@ -31,6 +34,7 @@ const data = {
       description: "Mantequilla de avellana, alto aporte de minerales🌱"
     },
     {
+      _id: "4",
       name: "Orégano merquén",
       txtProduct: "manteqilla-oregano-merquen",
       category: "Mantequillas",
@@ -41,6 +45,7 @@ const data = {
       description: "Mantequilla de maní + merquén y orégano, alto aporte energético del bueno🔥"
     },
     {
+      _id: "5",
       name: "Mani Coco",
       txtProduct: "manteqilla-mani-coco",
       category: "Mantequillas",
@@ -51,6 +56,7 @@ const data = {
       description: "Mantequilla de maní con coco rallado, alto aporte energético del bueno🔥"
     },
     {
+      _id: "6",
       name: "Pack 5 variedades",
       txtProduct: "manteqilla-pack",
       category: "Mantequillas",

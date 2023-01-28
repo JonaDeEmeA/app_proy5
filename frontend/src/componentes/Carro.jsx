@@ -18,7 +18,7 @@ export const Carro=()=> {
 
   const {state} = useContext(CarroContext);
   const { carro } = state; 
-  const total = carro.carroItems.length;
+  const total = carro.carroItems.reduce((a, c) => a + c.cantidad, 0);
   
   return (
     <IconButton  aria-label="cart">

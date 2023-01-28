@@ -18,6 +18,15 @@ app.get("/api/producto/:item", (req, res)=>{
   };
 });
 
+app.get("/api/productos/:id", (req, res)=>{
+  const producto = data.producto.find(e => e._id === req.params.id);
+  if (producto) {
+    res.send(producto);
+  } else {
+    res.status(404).send({message: "Producto no encontrado"})
+  };
+});
+
 const puerto = process.env.PORT || 5000;
 app.listen(puerto, ()=>{
   console.log(`escuchando en el puerto http://localhost:${puerto}`);

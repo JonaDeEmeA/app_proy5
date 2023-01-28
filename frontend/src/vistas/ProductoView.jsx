@@ -65,15 +65,36 @@ export const ProductoView = () => {
 
 
    const {state, dispatch: ctxDispatch} = useContext(CarroContext);
+   const {carro} = state;
+   
+   const handlerAddCarro= async () =>{
 
-   const handlerAddCarro=()=>{
+    //si el producto actual existe en el carro o no
+    const itemExsite = carro.carroItems.find(e => e._id === producto._id) ;
 
-    console.log("el btn");
+    //si existe se imcrementa la cantidad en uno, si no, la cantidad sera 1, 
+    const cantidad = itemExsite ? itemExsite.cantidad + 1 : 1;
+
+    //consulta al producto actual. Se controla que la cantidad de items del producto actual, en el carro, no sea menor que cantidad en stock. 
+    const {data} = await axios.get(`/api/productos/${producto._id}`);
+    if (data.inStock < cantidad) {
+      window.alert("Lo sentimos. El producto no tiene stock");
+      return;
+    }
+    
+    
+    //console.log(carro.carroItems);
+     
+    //console.log(itemExsite);
+    console.log(cantidad);
      ctxDispatch({
       type: "ADD_ITEM_CARRO",
-      datos: {...producto, cantidad: 1},
+      payload: {...producto, cantidad},
+      
      });
+     
    };
+
 
   return (loading ? (
     <div>Cargando...</div>
