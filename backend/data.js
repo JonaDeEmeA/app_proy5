@@ -1,4 +1,14 @@
+import bcrypt from 'bcryptjs';
+//const bcrypt = require("bcryptjs");
 const data = {
+  users: [
+    {
+      name: 'Erbin',
+      email: 'erbinmvg@gmail.com',
+      password: bcrypt.hashSync('123456')
+    }
+
+  ],
   producto: [
     {
       name: "100% Mani",
@@ -64,5 +74,5 @@ const data = {
 };
 
 
-
-module.exports = data;
+export default data;
+//module.exports = data;
