@@ -15,10 +15,13 @@ body{
   height: 300px;
   
   object-fit:cover;
-  
-  
-  
-  
-  
+
+}
+
+.thumbnail-img{
+
+
+  height: 100px;
+
 }
 

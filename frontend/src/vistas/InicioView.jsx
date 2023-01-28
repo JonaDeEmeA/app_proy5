@@ -65,7 +65,7 @@ export const InicioView = () => {
   return ( 
     <>
      
-      
+     
       <Box component="main" bgcolor="primary.main" className="contenedor"
       sx={{ display: 'flex',
       }} >

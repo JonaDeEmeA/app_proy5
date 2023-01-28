@@ -8,7 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import { Grid, Box, Typography, Button, createTheme } from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 
@@ -37,6 +37,7 @@ const reducer = (state, action) => {
 
 export const ProductoView = () => {
 
+  const navigate = useNavigate();
   const params = useParams();
   const { txtProduct } = params;
 
@@ -92,15 +93,21 @@ export const ProductoView = () => {
       payload: {...producto, cantidad},
       
      });
+
+     navigate("/carro");
      
    };
 
+   
 
-  return (loading ? (
+  return (
+    
+    loading ? (
     <div>Cargando...</div>
   ) : error ? (
     <div>{error}</div>
   ) : (
+    
     <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "94vh" }}>
   
       <Grid width="80%" container justifyContent="center"
@@ -121,13 +128,13 @@ export const ProductoView = () => {
             textTransform="uppercase"
             fontWeight="lg"
           >
-            Ingredients
+            DESCRIPCION
           </Typography>
           <List aria-labelledby="basic-list-demo">
             <ListItem><h1>{producto.name}</h1></ListItem>
             <Calificacion numRating={producto.rating} />
             <ListItem>Valor : ${producto.price}</ListItem>
-            <ListItem>Descripcion :{producto.description} </ListItem>
+            <ListItem>{producto.description} </ListItem>
           </List>
 
         </Grid>
