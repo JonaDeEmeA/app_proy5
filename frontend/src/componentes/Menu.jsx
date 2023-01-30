@@ -49,7 +49,7 @@ export const MuiMenu = () => {
         }}
       >
         <MenuItem onClick={goHome}>Inicio</MenuItem>
-        {/* <MenuItem >Inicio</MenuItem> */}
+       
         <MenuItem onClick={handleClose}>Ingresar</MenuItem>
         <MenuItem onClick={handleClose}>Registrar</MenuItem>
       </Menu>

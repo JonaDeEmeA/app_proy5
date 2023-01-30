@@ -6,7 +6,7 @@ import { Button, Stack, Box } from "@mui/material"
 
 
 
-export const BtnGeneral = ({nombreBtn, accion, icon, color})=>{
+export const BtnGeneral = ({nombreBtn, accion, icon, color, size})=>{
 
 
     return(
@@ -17,7 +17,7 @@ export const BtnGeneral = ({nombreBtn, accion, icon, color})=>{
         }}>
         <Stack spacing={2} sx={{ alignItems:"center", justifyContent: "space-between"}} >
                 
-            <Button  endIcon={icon} color={color} onClick={()=>accion()} variant="contained">{nombreBtn}</Button>
+            <Button  endIcon={icon} color={color} onClick={()=>accion()} variant="contained" size={size}>{nombreBtn} </Button>
             
         </Stack>
         </Box>

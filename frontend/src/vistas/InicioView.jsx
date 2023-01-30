@@ -66,7 +66,7 @@ export const InicioView = () => {
     <>
      
      
-      <Box component="main" bgcolor="primary.main" className="contenedor"
+      <Box component="main"  className="contenedor"
       sx={{ display: 'flex',
       }} >
         <Grid container sx={{ justifyContent: 'space-around'}} >

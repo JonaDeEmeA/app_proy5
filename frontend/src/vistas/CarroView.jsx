@@ -1,4 +1,4 @@
-import {  useContext } from "react";
+import { useContext } from "react";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -30,13 +30,13 @@ export const CarroView = () => {
       </Helmet> */}
       <h2>Carro de Compras</h2>
 
-      <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "94vh" }}>
+      <Box display="flex" justifyContent="center" alignItems='flex-start' sx={{ height: "94vh" }}>
 
         <Grid width="80%" container justifyContent="center"
-          sx={{ bgcolor: "success.main", }} >
+          sx={{ bgcolor: "success.main" }} >
 
 
-          <Grid item xs={12} sm={5} display="flex" sx={{ bgcolor: "primary.main", justifyContent: 'center' }}>
+          <Grid item xs={12} md={5} sx={{ bgcolor: "primary.main", }}>
             {carroItems.length === 0 ? (
               console.log("carro vacio")
             ) :
@@ -45,62 +45,70 @@ export const CarroView = () => {
 
                   {carroItems.map(item => (
                     <ListItem key={item._id}>
-                      <Grid container>
-                        <Grid item sm={4}>
+
+                      <Grid container >
+
+                        <Grid item xs={3} >
                           <img
                             src={item.image}
                             alt={item.name}
                             className="thumbnail-img">
-                          </img>{" "}
-                          <Link to={`/producto/${item.txtProduct}`} > {item.name} </Link>
+                          </img>
                         </Grid>
-                        <Grid item sm={3}>
-                          <IconButton aria-label="remove" disabled={item.cantidad === 1}>
-                            <RemoveCircleIcon  />{" "}
-                          </IconButton>
-                          <span>{item.cantidad}</span>{" "}
+                        {/* sx={{ xs:{direction:"column"}, md:{direction:"row"} }} */}
+                        <Grid item xs={9}  my={1} display="flex" justifyContent= 'center'  >
+                          <Grid container 
+                          alignItems= 'center' 
+                           >
+                            <Grid item xs={12} lg={4} textAlign= 'center' mb={1}  >
+                              <Link to={`/producto/${item.txtProduct}`} > {item.name} </Link>
+                            </Grid>
 
-                          <IconButton  aria-label="add" disabled={item.cantidad === item.inStock}>
-                            <AddCircleIcon />
-                          </IconButton>
+                            <Grid item xs={12} lg={8} display="flex" 
+                            justifyContent={{xs:"center", md:"space-evenly"}}
+                            
+                            
+                             alignItems= 'center' >
+                              <IconButton aria-label="remove" disabled={item.cantidad === 1}>
+                                <RemoveCircleIcon />{" "}
+                              </IconButton>
+                              <span>{item.cantidad}</span>{" "}
+                              <IconButton aria-label="add" disabled={item.cantidad === item.inStock}>
+                                <AddCircleIcon />
+                              </IconButton>
+                              ${item.price}
+                              <IconButton aria-label="erase">
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
+
+                          </Grid>
                         </Grid>
-                        <Grid item sm={3}>
-                          ${item.price}
-                        </Grid>
-                        <Grid item sm={3}>
-
-                          <IconButton aria-label="add">
-                            <DeleteIcon />
-                          </IconButton>
-                        </Grid>
-
-
-
 
                       </Grid>
                     </ListItem>
                   ))}
-               
+
                 </List>
               )}
 
           </Grid>
-          <Grid item xs={12} sm={4} sx={{ bgcolor: "error.main" }}>
+          <Grid item xs={12} md={3} ml={{xs:0, md:5}} sx={{ bgcolor: "error.main" }} >
 
-          <Card  >
-            <CardContent  display="flex"  >
-              <h3>
-                SubTotal ({carroItems.reduce((a, c)=> a + c.cantidad, 0)}{" "}
-                items) : ${carroItems.reduce((a, c)=> a + c.price * c.cantidad, 0)}
-              </h3>
-              
-              <BtnGeneral color="warning" nombreBtn="ir a Pagar" />
-            </CardContent>
-           
-          </Card>        
+            <Card   >
+              <CardContent sx={{textAlign: 'center'}} >
+                <h3 >
+                  SubTotal ({carroItems.reduce((a, c) => a + c.cantidad, 0)}{" "}
+                  items) : ${carroItems.reduce((a, c) => a + c.price * c.cantidad, 0)}
+                </h3>
+
+                <BtnGeneral color="warning" nombreBtn="ir a Pagar" size="small" />
+              </CardContent>
+
+            </Card>
 
           </Grid>
-          
+
 
         </Grid>
 

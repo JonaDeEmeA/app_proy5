@@ -27,14 +27,14 @@ export default function TarjetaProducto(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.producto}
           </Typography>
-          <Calificacion numVistas={props.numVistas}/>
+          {/* <Calificacion numVistas={props.numVistas}/> */}
           <Typography variant="body2" color="text.secondary">
-            {props.valor}
+            $ {props.valor}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" variant="contained" startIcon={<ShoppingCartIcon />} >
+        <Button size="small" color="success" variant="contained" startIcon={<ShoppingCartIcon />} >
           Agregar
         </Button>
       </CardActions>

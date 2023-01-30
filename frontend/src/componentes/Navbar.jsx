@@ -14,8 +14,8 @@ import { CarroContext } from "../contexto/CarroContext";
 export const Navbar = () => {
 
      const {state} = useContext(CarroContext);
-     const { carro } = state; 
-
+      const { carro } =  state; 
+      console.log(`Desde Nav, Largo : ${carro.carroItems.length}`);
 
     
 
