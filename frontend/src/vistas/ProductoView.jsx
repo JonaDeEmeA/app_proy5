@@ -136,12 +136,11 @@ export const ProductoView = () => {
           </List>
 
         </Grid>
-        <Grid justifyContent="center"  item xs={12} sm={3} xl={2}>
+        <Grid   item xs={12} sm={3} xl={2}>
           
-          <Card  >
-            <CardContent  display="flex"  >
+         
               
-              <Grid container >
+              <Grid container height="100%" display="flex" justifyContent= 'center' alignContent= 'center' >
                 <Grid item xs={6} sm={6}>
               <Typography  sx={{ fontSize: 18 }} color="text.secondary" >
                  Valor : 
@@ -180,9 +179,7 @@ export const ProductoView = () => {
               
              
               </Grid>  
-            </CardContent>
-           
-          </Card>
+
        
         </Grid>
 

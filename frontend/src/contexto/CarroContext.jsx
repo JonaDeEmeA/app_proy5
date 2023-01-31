@@ -4,7 +4,9 @@ export const CarroContext = createContext();
 
 const initialState = {
   carro: {
-    carroItems: [],
+    carroItems: localStorage.getItem("carroItems") ?
+    JSON.parse(localStorage.getItem("carroItems")) 
+    : [],
   },
 };
 
@@ -21,20 +23,26 @@ const reducer = (state, action) => {
         item => item._id === itemNuevo._id
       );
       //itemsCarro
-      
-      
       const carroItems = itemExsite ?
         state.carro.carroItems.map(
           (item) => item._id === itemExsite._id ?
             itemNuevo : item) :
         [...state.carro.carroItems, itemNuevo];
 
-      // console.log(`ultimo estado: ${(JSON.stringify(carroItems))}`);
-      console.log(`ultimo estado largo: ${carroItems.length}`);
-      
-
-
+        localStorage.setItem(`carroItems`, JSON.stringify(carroItems));
+      //console.log(`ultimo estado: ${(JSON.stringify(carroItems))}`);
+      //console.log(`ultimo estado largo: ${carroItems.length}`);
       return { ...state, carro: { ...state.carro, carroItems } };
+
+      case "DELETE_ITEM_CARRO":{
+        const carroItems = state.carro.carroItems.filter(
+          (item)=> item._id !== action.payload._id
+        );
+
+        localStorage.setItem(`carroItems`, JSON.stringify(carroItems));
+          return {...state, carro:{...state.carro, carroItems}};
+      };
+
 
       break;
 
