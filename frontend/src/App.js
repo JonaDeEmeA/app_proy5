@@ -5,6 +5,7 @@ import {InicioView} from "./vistas/InicioView"
 import { ProductoView } from './vistas/ProductoView';
 import { Footer } from "./componentes/Footer"
 import { CarroView } from './vistas/CarroView';
+import { RegistroView } from './vistas/RegistroView';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       <Route path="/" element={<InicioView />} />
       <Route path="/carro" element={<CarroView />} />
+      <Route path="/registro" element={<RegistroView />} />
       <Route path="/producto/:txtProduct" element={<ProductoView />} />
     
     </Routes>

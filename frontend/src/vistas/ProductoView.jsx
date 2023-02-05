@@ -1,3 +1,4 @@
+
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -130,7 +131,7 @@ export const ProductoView = () => {
           </Typography>
           <List aria-labelledby="basic-list-demo">
             <ListItem><h1>{producto.name}</h1></ListItem>
-            <Calificacion numRating={producto.rating} />
+            {/* <Calificacion numRating={producto.rating} /> */}
             <ListItem>Valor : ${producto.price}</ListItem>
             <ListItem>{producto.description} </ListItem>
           </List>
@@ -171,7 +172,7 @@ export const ProductoView = () => {
 
               
               {producto.inStock > 0 && (
-                 <Grid mt={2} item xs={12} > 
+                 <Grid  pb={3} mt={2} item xs={12} > 
                   <BtnGeneral color="warning" nombreBtn="Agregar" accion={handlerAddCarro}/>
                   </Grid> 
                   )}

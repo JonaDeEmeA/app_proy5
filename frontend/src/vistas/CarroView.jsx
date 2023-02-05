@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Box, Typography, Button, createTheme } from "@mui/material";
+import { Grid, Box} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Alert from '@mui/material/Alert';
@@ -50,7 +50,7 @@ export const CarroView = () => {
  };
 
  const handlerGoPagar = ()=>{
-  navigate(`/signin?redirect=/envio`)
+  navigate(`/registro?redirect=/envio`)
  }
 
   return (

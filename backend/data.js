@@ -7,7 +7,7 @@ const data = {
       category: "Mantequillas",
       image: "https://jonadeemea.github.io/Kymani_landing/img/100mani.jpg",
       price: 6000,
-      inStock: 15,
+      inStock: 2,
       rating: 5,
       description: "Mantequilla de mani 100% maní, alto aporte proteico para regenerar masa muscular 💪🏻 🔥"
     },
@@ -40,7 +40,7 @@ const data = {
       category: "Mantequillas",
       image: "https://jonadeemea.github.io/Kymani_landing/img/merquen-oregano.jpg",
       price: 6000,
-      inStock: 20,
+      inStock: 3,
       rating: 4.5,
       description: "Mantequilla de maní + merquén y orégano, alto aporte energético del bueno🔥"
     },
@@ -62,7 +62,7 @@ const data = {
       category: "Mantequillas",
       image: "https://jonadeemea.github.io/Kymani_landing/img/mani-kit.jpg",
       price: 25000,
-      inStock: 20,
+      inStock: 0,
       rating: 4.5,
       description: "Pack variedades de mantequillas"
     }
