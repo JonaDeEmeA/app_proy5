@@ -1,5 +1,4 @@
 
-
 // import data from "../data/data"
 import axios from "axios";
 import { Box, Typography, Grid } from "@mui/material";
@@ -13,13 +12,13 @@ import logger from "use-reducer-logger";
 const reducer = (state, action) => {
   switch (action.type) {
     case "PETICION_SOLICITUD":
-      return {...state, loading: true};
+      return { ...state, loading: true };
     case "PETICION_EXISTOSO":
-      return {...state, productos: action.payload, loading: false};
+      return { ...state, productos: action.payload, loading: false };
     case "PETICION_FALLO":
-      return {...state, loading: false, error: action.payload};
-      
-  
+      return { ...state, loading: false, error: action.payload };
+
+
     default:
       return state;
   };
@@ -29,23 +28,24 @@ const reducer = (state, action) => {
 
 export const InicioView = () => {
 
-  const [{loading, error, productos}, dispatch] = useReducer(logger(reducer),{
+  const [{ loading, error, productos }, dispatch] = useReducer(logger(reducer), {
     productos: [],
     loading: true,
-    error: ""});
+    error: ""
+  });
 
   //const [producto, setProducto] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "PETICION_SOLICITUD"});
+      dispatch({ type: "PETICION_SOLICITUD" });
       try {
         const respuesta = await axios.get("/api/productos");
         dispatch({ type: "PETICION_EXISTOSO", payload: respuesta.data });
-        
+
       } catch (err) {
         dispatch({ type: "PETICION_FALLO", payload: err.message });
       }
-     
+
       //setProducto(respuesta.data)
     };
     fetchData();
@@ -54,43 +54,56 @@ export const InicioView = () => {
 
 
   const navegar = useNavigate();
-  const goNavegar =(e)=>{
-    
+  const goNavegar = (e) => {
+
     let atributo = e.currentTarget.getAttribute("txtproducto");
     console.log(atributo);
     navegar(`/producto/${atributo}`)
-    
+
   }
 
-  return ( 
+  return (
     <>
-     
-     
-      <Box component="main" bgcolor="primary.main" className="contenedor"
-      sx={{ display: 'flex',
-      }} >
-        <Grid container sx={{ justifyContent: 'space-around'}} >
-           { loading ? (<div>Cargando...</div>):
-           error ? (<div>{error}</div>): (
 
-      productos.map(tarjeta=>(
-        <Grid item m={2} key={tarjeta.txtProduct}  >
-            <TarjetaProducto
+
+      <Box component="main" className="contenedor"
+        sx={{
+          display: 'flex',
+        }} >
+        <Grid container sx={{ justifyContent: 'space-around' }} >
+          {loading ? (<div>Cargando...</div>) :
+            error ? (<div>{error}</div>) : (
+
+              productos.map(tarjeta => (
+                <Grid item m={2} key={tarjeta.txtProduct}  >
+                  <TarjetaProducto
+                    item={tarjeta}
+                    stock={tarjeta.inStock}
+                    txtProducto={tarjeta.txtProduct}
+                    accion={goNavegar}
+                    valor={tarjeta.price}
+                    producto={tarjeta.name}
+                    imagen={tarjeta.image}
+                  />
+                </Grid>
+              ))
+            )}
+
+
+        </Grid>
+      </Box>
+
+    </>
+  );
+
+};
+/*<TarjetaProducto producto={producto}></TarjetaProducto>*/
+/*<TarjetaProducto
+
+            
             txtProducto={tarjeta.txtProduct}
             accion={goNavegar}
             valor={tarjeta.price}
             producto={tarjeta.name} 
             imagen={tarjeta.image}
-            />
-          </Grid>
-      ))
-      )} 
-        
-
-        </Grid>
-      </Box>
-      
-    </>
-  );
-
-};
+            />*/

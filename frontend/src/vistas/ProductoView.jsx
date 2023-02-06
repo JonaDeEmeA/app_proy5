@@ -1,5 +1,4 @@
 
-
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -132,18 +131,17 @@ export const ProductoView = () => {
           </Typography>
           <List aria-labelledby="basic-list-demo">
             <ListItem><h1>{producto.name}</h1></ListItem>
-            <Calificacion numRating={producto.rating} />
+            {/* <Calificacion numRating={producto.rating} /> */}
             <ListItem>Valor : ${producto.price}</ListItem>
             <ListItem>{producto.description} </ListItem>
           </List>
 
         </Grid>
-        <Grid justifyContent="center"  item xs={12} sm={3} xl={2}>
+        <Grid   item xs={12} sm={3} xl={2}>
           
-          <Card  >
-            <CardContent  display="flex"  >
+         
               
-              <Grid container >
+              <Grid container height="100%" display="flex" justifyContent= 'center' alignContent= 'center' >
                 <Grid item xs={6} sm={6}>
               <Typography  sx={{ fontSize: 18 }} color="text.secondary" >
                  Valor : 
@@ -174,7 +172,7 @@ export const ProductoView = () => {
 
               
               {producto.inStock > 0 && (
-                 <Grid mt={2} item xs={12} > 
+                 <Grid  pb={3} mt={2} item xs={12} > 
                   <BtnGeneral color="warning" nombreBtn="Agregar" accion={handlerAddCarro}/>
                   </Grid> 
                   )}
@@ -182,9 +180,7 @@ export const ProductoView = () => {
               
              
               </Grid>  
-            </CardContent>
-           
-          </Card>
+
        
         </Grid>
 
