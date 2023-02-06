@@ -18,7 +18,7 @@ dotenv.config();
 
 mongoose
  .connect(process.env.MONGODB_URI).then(()=>{
-    console.log('connected to db')
+    console.log('Conectado a la BD')
 }).catch(err=>{
   console.log(err.message)
 });
@@ -26,9 +26,11 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
-//app.use('/api/seed', seedRouter);
-//app.use('/api/users', userRouter);
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/seed', seedRouter);
+app.use('/api/users', userRouter);
+
 app.get("/api/users", (req, res)=>{
   
   res.send(data.users);
