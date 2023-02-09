@@ -51,14 +51,12 @@ export const InicioView = () => {
     fetchData();
   }, []);
 
-
-
   const navegar = useNavigate();
   const goNavegar = (e) => {
 
     let atributo = e.currentTarget.getAttribute("txtproducto");
     console.log(atributo);
-    navegar(`/producto/${atributo}`)
+    navegar(`producto/${atributo}`)
 
   }
 
@@ -74,7 +72,7 @@ export const InicioView = () => {
           {loading ? (<div>Cargando...</div>) :
             error ? (<div>{error}</div>) : (
 
-              productos.map(tarjeta => (
+              productos.productos.map(tarjeta => (
                 <Grid item m={2} key={tarjeta.txtProduct}  >
                   <TarjetaProducto
                     item={tarjeta}
@@ -97,13 +95,3 @@ export const InicioView = () => {
   );
 
 };
-/*<TarjetaProducto producto={producto}></TarjetaProducto>*/
-/*<TarjetaProducto
-
-            
-            txtProducto={tarjeta.txtProduct}
-            accion={goNavegar}
-            valor={tarjeta.price}
-            producto={tarjeta.name} 
-            imagen={tarjeta.image}
-            />*/

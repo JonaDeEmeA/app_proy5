@@ -5,12 +5,14 @@ import CardContent from '@mui/material/CardContent';
 import { Grid, Box} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import IconButton from '@mui/material/IconButton';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Avatar from '@mui/material/Avatar';
 
 import { BtnGeneral } from '../componentes/BtnGeneral';
 
@@ -25,10 +27,12 @@ export const CarroView = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(CarroContext);
   const { carro: { carroItems } } = state;
-
+  console.log(carroItems);
+  
 
   const handlerUpdateCarro = async (item, cantidad) =>{
-    const {data} = await axios.get(`/api/productos/${item._id}`);
+    const {data} = await axios.get(`api/productos/${item._id}`);
+    
 
     if (data.inStock < cantidad) {
       window.alert("Lo sentimos. El producto no tiene stock");
@@ -73,20 +77,21 @@ export const CarroView = () => {
                <strong>No existen items en el carro de compras!</strong>
              </Alert>
             ) :
-              (
+              ( 
                 <List>
-
+                  
                   {carroItems.map(item => (
+                    
+                    
                     <ListItem key={item._id}>
 
                       <Grid container >
 
-                        <Grid item xs={3} >
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="thumbnail-img">
-                          </img>
+                        <Grid item xs={3} display="flex"  >
+
+                          <Avatar alt={item.name} src={item.image}
+                          sx={{ width: 70, height: 70 }} />
+                         
                         </Grid>
                         {/* sx={{ xs:{direction:"column"}, md:{direction:"row"} }} */}
                         <Grid item xs={9} my={1} display="flex" justifyContent='center'  >
@@ -122,9 +127,12 @@ export const CarroView = () => {
                         </Grid>
 
                       </Grid>
-                    </ListItem>
+                      
+                    </ListItem> 
+                    
+                    
                   ))}
-
+                  
                 </List>
               )}
 

@@ -51,7 +51,7 @@ export const ProductoView = () => {
     const fetchData = async () => {
       dispatch({ type: "PETICION_SOLICITUD" });
       try {
-        const respuesta = await axios.get(`/api/producto/${txtProduct}`);
+        const respuesta = await axios.get(`/api/productos/item/${txtProduct}`);
         dispatch({ type: "PETICION_EXISTOSO", payload: respuesta.data });
 
       } catch (err) {
@@ -63,9 +63,11 @@ export const ProductoView = () => {
     fetchData();
   }, [txtProduct]);
 
-
+  
    const {state, dispatch: ctxDispatch} = useContext(CarroContext);
    const {carro} = state;
+  
+   
    
    const handlerAddCarro= async () =>{
 
@@ -77,16 +79,23 @@ export const ProductoView = () => {
 
     //consulta al producto actual. Se controla que la cantidad de items del producto actual, en el carro, no sea menor que cantidad en stock. 
     const {data} = await axios.get(`/api/productos/${producto._id}`);
-    if (data.inStock < cantidad) {
-      window.alert("Lo sentimos. El producto no tiene stock");
-      return;
+    
+    try {
+      if (data.inStock < cantidad) {
+        window.alert("Lo sentimos. El producto no tiene stock");
+        return;
+      }
+    } catch(e){
+      console.log(e)
     }
+
     
     
-    //console.log(carro.carroItems);
+    
+    //console.log("data");
      
     //console.log(itemExsite);
-    console.log(cantidad);
+    //console.log(cantidad);
      ctxDispatch({
       type: "ADD_ITEM_CARRO",
       payload: {...producto, cantidad},

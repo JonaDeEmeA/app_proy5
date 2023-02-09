@@ -4,6 +4,7 @@ import data from './data.js';
 import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import productoRouter from './routes/productoRoute.js';
 //const dotenv = require("dotenv");
 //const express = require ("express");
 //const data = require ("./data.js");
@@ -29,37 +30,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/seed', seedRouter);
+app.use("/api/productos", productoRouter)
 app.use('/api/users', userRouter);
 
-app.get("/api/users", (req, res)=>{
+//Parece q esta intruccion hace lo mismo que la linea 32
+// app.get("/api/users", (req, res)=>{
   
-  res.send(data.users);
-});
+//   res.send(data.users);
+// });
+ 
 
-app.get("/api/productos", (req, res)=>{
-  res.send(data.producto);
-});
+
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message});
 });
 
-app.get("/api/producto/:item", (req, res)=>{
-  const producto = data.producto.find(e => e.txtProduct === req.params.item);
-  if (producto) {
-    res.send(producto);
-  } else {
-    res.status(404).send({message: "Producto no encontrado"})
-  };
-});
 
-app.get("/api/productos/:id", (req, res)=>{
-  const producto = data.producto.find(e => e._id === req.params.id);
-  if (producto) {
-    res.send(producto);
-  } else {
-    res.status(404).send({message: "Producto no encontrado"})
-  };
-});
 
 const puerto = process.env.PORT || 5000;
 app.listen(puerto, ()=>{

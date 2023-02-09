@@ -19,7 +19,7 @@ export const RegistroView = () => {
         height="40%" 
         justifyContent="center"
         alignItems= 'baseline'
-        sx={{ bgcolor: "success.main", borderRadius: 3 }}>
+        sx={{ bgcolor: "white", borderRadius: 3 }}>
 
           
           <Typography variant="h5" align="center" gutterBottom>
@@ -27,7 +27,9 @@ export const RegistroView = () => {
           </Typography>
           
           
-          <TextField fullWidth id="outlined-basic" label="Email" variant="outlined"/>
+          <TextField 
+          
+          fullWidth id="outlined-basic" label="Email" variant="outlined"/>
           <TextField  fullWidth id="outlined-basic" label="Contraseña" variant="outlined"
           sx={{ mb: 2 }} />
           <BtnGeneral  color="warning" nombreBtn="Registrar" />
