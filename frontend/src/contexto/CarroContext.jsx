@@ -3,6 +3,11 @@ import { createContext, useReducer } from "react";
 export const CarroContext = createContext();
 
 const initialState = {
+
+  infoUser: localStorage.getItem("infoUser") ?
+  (JSON.parse(localStorage.getItem("infoUser"))) : null,
+
+
   carro: {
     carroItems: localStorage.getItem("carroItems") ?
     JSON.parse(localStorage.getItem("carroItems")) 
@@ -42,6 +47,12 @@ const reducer = (state, action) => {
         localStorage.setItem(`carroItems`, JSON.stringify(carroItems));
           return {...state, carro:{...state.carro, carroItems}};
       };
+
+      case "SIGNIN_USER":
+        return {...state, infoUser: action.payload};
+
+      case "SIGNOUT_USER":
+        return {...state, infoUser: null};
 
 
       break;

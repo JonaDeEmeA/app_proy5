@@ -15,11 +15,13 @@ seedRouter.get('/', async (req, res) => {
     res.send({ createdProductos});
     
     
-    // await User.deleteMany({});
-    // const createdUsers = await User.insertMany(data.users);
-    // res.send({ createdUsers});
+     await User.deleteMany({});
+     const createdUsers = await User.insertMany(data.users);
+     res.send({ createdUsers});
     
 });
+
+
 
 //module.exports = seedRouter;
 
