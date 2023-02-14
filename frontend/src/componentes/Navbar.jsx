@@ -38,7 +38,9 @@ export const Navbar = () => {
    const handleSalir = ()=>{
     ctxDispatch({type: "SIGNOUT_USER"});
     localStorage.removeItem("infoUser");
-    console.log("salir");
+    localStorage.removeItem("direccionEnvio");
+    
+    
    };
 
 

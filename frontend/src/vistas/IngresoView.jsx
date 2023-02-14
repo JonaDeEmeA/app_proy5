@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CarroContext } from "../contexto/CarroContext";
 
-export const IngresoView = () => {
+export const IngresoView = () =>{
 
   const navigate = useNavigate();
   const { search } = useLocation();

@@ -9,6 +9,10 @@ const initialState = {
 
 
   carro: {
+    direccionEnvio: localStorage.getItem("direccionEnvio") ?
+    JSON.parse(localStorage.getItem("direccionEnvio"))
+    : {},
+
     carroItems: localStorage.getItem("carroItems") ?
     JSON.parse(localStorage.getItem("carroItems")) 
     : [],
@@ -35,11 +39,10 @@ const reducer = (state, action) => {
         [...state.carro.carroItems, itemNuevo];
 
         localStorage.setItem(`carroItems`, JSON.stringify(carroItems));
-      //console.log(`ultimo estado: ${(JSON.stringify(carroItems))}`);
-      //console.log(`ultimo estado largo: ${carroItems.length}`);
+    
       return { ...state, carro: { ...state.carro, carroItems } };
 
-      case "DELETE_ITEM_CARRO":{
+    case "DELETE_ITEM_CARRO":{
         const carroItems = state.carro.carroItems.filter(
           (item)=> item._id !== action.payload._id
         );
@@ -48,17 +51,26 @@ const reducer = (state, action) => {
           return {...state, carro:{...state.carro, carroItems}};
       };
 
-      case "SIGNIN_USER":
-        return {...state, infoUser: action.payload};
+    case "SIGNIN_USER":
+        return {...state, infoUser: action.payload,};
 
-      case "SIGNOUT_USER":
-        return {...state, infoUser: null};
+    case "SIGNOUT_USER":
+        return {...state, infoUser: null,
+        carro: {
+          carroItems: [],
+          direccionEnvio: {}
+        }
+      };
 
-
-      break;
+    case "SHIPPING_ADDRESS_SAVE":
+        return {...state, carro: {
+          ...state.carro, 
+          direccionEnvio: action.payload
+        }
+      };
 
     default:
-      return state;
+     return state;
 
 
   }

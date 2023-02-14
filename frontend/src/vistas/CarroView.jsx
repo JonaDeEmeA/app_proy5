@@ -54,7 +54,7 @@ export const CarroView = () => {
  };
 
  const handlerGoPagar = ()=>{
-  navigate(`/registro?redirect=/envio`)
+  navigate(`/ingreso?redirect=/envio`)
  }
 
   return (
