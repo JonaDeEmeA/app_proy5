@@ -51,6 +51,9 @@ const reducer = (state, action) => {
           return {...state, carro:{...state.carro, carroItems}};
       };
 
+    case "RESET_CARRO" :
+      return {...state, carro:{...state.carro, carroItems:[]}}
+
     case "SIGNIN_USER":
         return {...state, infoUser: action.payload,};
 

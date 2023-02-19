@@ -16,10 +16,10 @@ const userRouter = express.Router();
 userRouter.post(
     '/signin',
     expressAsyncHandler(async (req, res) => {
-        const user = await User.findOne({email: req.body.email});
-        //console.log(user)
+        const user = await User.findOne({ email: req.body.email });
+        
         if (user) {
-           
+
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 res.send({
                     _id: user._id,
@@ -31,8 +31,30 @@ userRouter.post(
                 return;
             }
         }
-        res.status(401).send({message:'Email o password inválida'})
+        res.status(401).send({ message: 'Email o password inválida' })
     })
 );
-//module.exports = userRouter;
+
+userRouter.post(
+    "/registro",
+    expressAsyncHandler(async (req, res) => {
+        const usuarioNuevo = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password)
+        });
+        //console.log(usuarioNuevo);
+        const user = await usuarioNuevo.save();
+        res.send({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            token: generateToken(user),
+        });
+        return;
+
+    }));
+
+
 export default userRouter;

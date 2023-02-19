@@ -5,14 +5,7 @@ import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import productoRouter from './routes/productoRoute.js';
-//const dotenv = require("dotenv");
-//const express = require ("express");
-//const data = require ("./data.js");
-//const mongoose = require("mongoose");
-//const { default: seedRouter } = require("./routes/seedRoutes.js");
-//const { default: userRouter } = require("./routes/userRoutes.js");
-
-//import mongoose from 'mongoose';
+import pedidoRouter from './routes/pedidoRoutes.js';
 
 
 dotenv.config();
@@ -32,13 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/seed', seedRouter);
 app.use("/api/productos", productoRouter)
 app.use('/api/users', userRouter);
+app.use("/api/pedidos", pedidoRouter);
 
-//Parece q esta intruccion hace lo mismo que la linea 32
-// app.get("/api/users", (req, res)=>{
-  
-//   res.send(data.users);
-// });
- 
 
 
 app.use((err, req, res, next) => {

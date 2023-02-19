@@ -24,6 +24,9 @@ export const Navbar = () => {
     const goIngreso = () => {
     navegar("/ingreso");
    };
+    const goRegistro = () => {
+    navegar("/registro");
+   };
 
 
    const [anchorEl, setAnchorEl] = useState(null);
@@ -39,6 +42,8 @@ export const Navbar = () => {
     ctxDispatch({type: "SIGNOUT_USER"});
     localStorage.removeItem("infoUser");
     localStorage.removeItem("direccionEnvio");
+    goHome();
+    //localStorage.removeItem("carroItems");
     
     
    };
@@ -73,7 +78,7 @@ export const Navbar = () => {
                     sx={{ display: {  md: "none" } }}
                 >
                     <MenuItem onClick={goHome}>IIInicio</MenuItem>
-                    <MenuItem onClick={handleClose}>RRRegistrar</MenuItem>
+                    <MenuItem onClick={goRegistro}>RRRegistrar</MenuItem>
                     {infoUser ? (
                         <div>
                         <Typography>
@@ -100,7 +105,7 @@ export const Navbar = () => {
                     justifyContent: "start",
                     display: { xs: "none", md: "inline-flex" }}}>
                     <Button color="inherit" onClick={goHome}>Inicio</Button>
-                    <Button color="inherit">Registrarrr</Button>
+                    <Button color="inherit" onClick={goRegistro}>Registrarrr</Button>
                     {infoUser ? 
                     (
                         <>                                  

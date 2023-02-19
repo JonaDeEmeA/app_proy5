@@ -19,7 +19,7 @@ export default function TarjetaProducto(props) {
   
   
   const handlerAddToCarro = async (item) =>{
-    console.log(`el stock de ${props.item.name} es ${props.item.inStock}`);
+    //console.log(`el stock de ${props.item.name} es ${props.item.inStock}`);
     const itemExsite = carroItems.find(e => e._id === item._id) ; 
     const cantidad = itemExsite ? itemExsite.cantidad + 1 : 1;
     

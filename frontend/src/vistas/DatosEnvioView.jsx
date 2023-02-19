@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CarroContext } from "../contexto/CarroContext";
 
+import { PasosCompra } from "../componentes/PasosCompra";
+
 
 export const DatosEnvioView = () => {
 
@@ -48,22 +50,23 @@ export const DatosEnvioView = () => {
       })
     );
 
-    navigate("/pago");
+    //navigate("/pago");
+    navigate("/pedido");
 
   };
 
   return (
-
-    <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "87vh" }}>
-      <Grid component="form" onSubmit={handlerSubmit} container p={3} width="80%"
+    
+    <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ height: "87vh" }}>
+      <PasosCompra pasos={1}/>
+      <Grid component="form" onSubmit={handlerSubmit} container mt={4} p={4} 
 
         height="70%"
-        justifyContent="center"
         alignItems='baseline'
-        sx={{ bgcolor: "white", borderRadius: 3 }}>
+        sx={{ bgcolor: "white", borderRadius: 3, width: { xs: "80%", md: "40%" } }}>
 
 
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography variant="h5" align="left" gutterBottom>
           Datos de envio
         </Typography>
 

@@ -93,7 +93,7 @@ export const CarroView = () => {
                           sx={{ width: 70, height: 70 }} />
                          
                         </Grid>
-                        {/* sx={{ xs:{direction:"column"}, md:{direction:"row"} }} */}
+                        
                         <Grid item xs={9} my={1} display="flex" justifyContent='center'  >
                           <Grid container
                             alignItems='center'

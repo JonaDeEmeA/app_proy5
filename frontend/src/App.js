@@ -6,7 +6,9 @@ import { ProductoView } from './vistas/ProductoView';
 import { Footer } from "./componentes/Footer"
 import { CarroView } from './vistas/CarroView';
 import { IngresoView } from './vistas/IngresoView';
+import { RegistroView } from './vistas/RegistroView';
 import { DatosEnvioView } from './vistas/DatosEnvioView';
+import { GenerarPedidoView } from './vistas/GenerarPedidoView';
 
 function App() {
   return (
@@ -16,10 +18,13 @@ function App() {
       <Route path="/" element={<InicioView />} />
       <Route path="/carro" element={<CarroView />} />
       <Route path="/ingreso" element={<IngresoView />} />
+      <Route path="/registro" element={<RegistroView />} />
       <Route path="/envio" element={<DatosEnvioView />} />
+      <Route path="/pedido" element={<GenerarPedidoView />} />
       <Route path="/producto/:txtProduct" element={<ProductoView />} />
     
     </Routes>
+    
     <Footer />
     </>
   );
