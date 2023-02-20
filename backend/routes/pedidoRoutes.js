@@ -41,5 +41,25 @@ pedidoRouter.get("/:id", expressAsyncHandler(async (req, res)=>{
 
 );
 
+pedidoRouter.put("/:id/pago",
+expressAsyncHandler(async (req, res)=>{
+  const pedido = await Pedido.findById(req.params.id);
+  if (pedido) {
+    pedido.pagado =  true;
+    pedido.pagadoEn = Date.now();
+    pedido.PaymentResult = {
+      id : req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.email_address
+    };
+    const pedidoUpdate = await pedido.save();
+    res.send({ message: "Pedido Pagado", pedido: pedidoUpdate })
+  }else{
+    res.status(404).send({ message: "Pedido No Econtrado" });
+  };
+})
+);
+
 
 export default pedidoRouter;

@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect, useReducer } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+
+
 import { CarroContext } from "../contexto/CarroContext";
+import { getError } from "../utils.js";
 
 import { Grid, Box, Button, TextField, Typography, ListItem, List, Card } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
@@ -15,13 +19,28 @@ const reducer = (state, action) => {
       return { ...state, cargando: false, pedido: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, cargando: false, error: action.payload };
+    case "PAY_REQUEST":
+      return { ...state, loadingPay: true };
+    case "PAY_SUCCESS":
+      return { ...state, loadingPay: false, successPay: true };
+    case "PAY_FAIL":
+      return { ...state, loadingPay: false};
+    case "PAY_RESET":
+      return { ...state, loadingPay: false, successPay: false};
+    
     default:
       return state;
   }
 }
 
+
+
+
+
+
 export const PedidoView = ()=>{
-  
+
+
   const { state } = useContext(CarroContext); 
   const { infoUser } = state;
 
@@ -30,11 +49,58 @@ export const PedidoView = ()=>{
 
   const navigate = useNavigate();
 
-  const [{cargando, error, pedido}, dispatch] = useReducer(reducer,{
+  const [{cargando, error, pedido, successPay, loadingPay}, dispatch] = useReducer(reducer,{
     cargando: true,
     pedido: {},
-    error: ""
+    error: "",
+    successPay: false,
+    loadingPay: false
   });
+
+  const [{ pendiente }, paypalDispatch] = usePayPalScriptReducer();
+ 
+  
+  
+ 
+  
+const createOrder = (data, actions)=>{
+  //console.log(data);
+  return actions.order
+  .create({
+    purchase_units: [
+      {
+        amount: { value: pedido.valorTotal },
+      },
+    ],
+  }).then((pedidoId)=>{
+    return pedidoId;
+  });
+};
+
+const onApprove = (data, actions)=>{
+  
+  return actions.order.capture().then(async function (details){
+    try {
+      dispatch({ type: "PAY_REQUEST" });
+      const { data } = await axios.put(
+        `/api/pedidos/${pedido._id}/pago`,
+        details, {
+          headers: { authorization : `Bearer ${infoUser.token}`},
+        }
+      );
+      dispatch({ type: "PAY_SUCCESS", payload: data });
+      alert("Pedido Pagado")
+      console.log(data);
+    } catch (error) {
+      dispatch({ type: "PAY_FAIL", payload: getError(error) })
+      alert("el pago falló")
+    };
+  });
+};
+ 
+const onError = (err)=> {
+  alert(`onError: ${err}`)
+}
 
 useEffect(()=>{
 
@@ -48,22 +114,40 @@ useEffect(()=>{
       // data trae los datos del pedido guardados en DB
       //console.log(data);
     } catch (error) {
-      dispatch({ type: "FETCH_FAIL",  })
-    }
+      dispatch({ type: "FETCH_FAIL", payload: getError(error) });
+    };
     
-  }
-
+  };
 
   if (!infoUser) {
     return navigate("/ingreso");
   };
 
   if (
-    !pedido._id || (pedido._id && pedido._id !== pedidoId)
+    !pedido._id || successPay || (pedido._id && pedido._id !== pedidoId)
     ) {
     fetchPedido();
-  } 
-}, [pedido, infoUser, pedidoId, navigate]);
+    if (successPay) {
+      dispatch({ type: "PAY_RESET" });
+    }
+  } else{
+    const loadPaypalScript = async ()=> {
+      const { data: idCliente } = await axios.get("/api/keys/paypal", {
+        headers: { authorization: `Bearer ${infoUser.token}` }
+      });
+      paypalDispatch({
+        type: "resetOptions",
+        value:{
+          "client-id" : idCliente,
+          currency : "USD"
+        }
+      });
+      paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+    };
+
+    loadPaypalScript();
+  }
+}, [pedido, infoUser, pedidoId, navigate, paypalDispatch, successPay]);
 
 
 
@@ -86,7 +170,7 @@ useEffect(()=>{
           <ListItem p={0}>
             <Card sx={{ width: "100%" }} >
               <Typography variant="h5" gutterBottom>
-                Datos de envio
+                Pedido N° {pedidoId}
               </Typography>
               <Typography variant="subtitle1">
                 <strong>Nombre:</strong> {pedido.direccionEnvio.nombre} <br />
@@ -100,9 +184,9 @@ useEffect(()=>{
               <Typography>
                 <strong>Telefono:</strong> {pedido.direccionEnvio.fono} <br />
                 {pedido.enviado ? (
-                  <h5>Enviado a {pedido.enviadoEn}</h5>
+                  <strong>Enviado a {pedido.enviadoEn}</strong>
                 ) : (
-                  <h5>No enviado</h5>
+                  <strong>No enviado</strong>
                 )}
               </Typography>
             </Card>
@@ -181,16 +265,25 @@ useEffect(()=>{
               <span>Total{pedido.valorTotal.toFixed(2)}</span>
 
             </ListItem>
-            <ListItem>
-              <Button
-                type="button"
-                //disabled={carro.carroItems.length === 0}
-                //onClick={handlerConfirmarPedido}
-                variant="contained" color="success">
-                Confirmar Pedido
-              </Button>
-             
-            </ListItem>
+            {!pedido.pagado && (
+              <ListItem>
+                
+               
+                {pendiente ? ( 
+                  <h5>...cargando</h5>
+                ) : (
+                  
+                    <PayPalButtons
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                      onError={onError}>
+                      </PayPalButtons>
+                  
+                )}
+                {loadingPay && <h5>...cargando</h5>}
+              </ListItem>
+            )}
+            
           </List>
         </Card>
 
