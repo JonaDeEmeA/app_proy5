@@ -57,7 +57,7 @@ export const DatosEnvioView = () => {
 
   return (
     
-    <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ height: "87vh" }}>
+    <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
       <PasosCompra pasos={1}/>
       <Grid component="form" onSubmit={handlerSubmit} container mt={4} p={4} 
 

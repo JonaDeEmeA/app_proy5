@@ -30,4 +30,16 @@ pedidoRouter.post("/", expressAsyncHandler(async (req, res)=>{
 );
 
 
+pedidoRouter.get("/:id", expressAsyncHandler(async (req, res)=>{
+  const pedido = await Pedido.findById(req.params.id);
+  if (pedido) {
+    res.send(pedido);
+  } else {
+    res.status(404).send({ message: "Pedido No Encontrado" })
+  };
+})
+
+);
+
+
 export default pedidoRouter;

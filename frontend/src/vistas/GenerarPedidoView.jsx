@@ -19,7 +19,7 @@ const reducer = (state, action) => {
     default:
       return state;
   }
-}
+};
 
 
 export const GenerarPedidoView = () => {
@@ -88,7 +88,7 @@ export const GenerarPedidoView = () => {
 
   return (
 
-    <Box display="flex" flexDirection='column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.5vh" }}>
+    <Box display="flex" flexDirection='column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
       <PasosCompra pasos={2} />
       <Grid container mt={4} p={0}
         height="70%"
@@ -155,7 +155,7 @@ export const GenerarPedidoView = () => {
           </List>
 
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <Card>
             <Typography variant="h5" gutterBottom>
               Resumen
@@ -186,7 +186,7 @@ export const GenerarPedidoView = () => {
                   variant="contained" color="success">
                   Confirmar Pedido
                 </Button>
-                {/* {cargando && "cargando..."} */}
+                {cargando && "cargando..."}
               </ListItem>
             </List>
           </Card>

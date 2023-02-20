@@ -55,7 +55,7 @@ export const InicioView = () => {
   const goNavegar = (e) => {
 
     let atributo = e.currentTarget.getAttribute("txtproducto");
-    console.log(atributo);
+    //console.log(atributo);
     navegar(`producto/${atributo}`)
 
   }
