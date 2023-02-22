@@ -11,7 +11,7 @@ const pedidoSchema = new mongoose.Schema(
                 price: { type: Number, required: true },
                 producto: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: ("Producto"),
+                    ref: "Producto",
                     required: true,
                 },
             },
@@ -36,11 +36,8 @@ const pedidoSchema = new mongoose.Schema(
         valorEnvio: { type: Number, required: true },
         valorIVA: { type: Number, required: true },
         valorTotal: { type: Number, required: true },
-        /*usuario: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: ("User"),
-            required: true,
-        },*/
+        //user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+        idUsuario: { type: String, required: true },
         pagado: { type: Boolean, default: false },
         pagadoEn: { type: Date },
         enviado: { type: Boolean, default: false },

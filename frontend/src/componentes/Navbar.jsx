@@ -27,6 +27,9 @@ export const Navbar = () => {
     const goRegistro = () => {
     navegar("/registro");
    };
+    const goMisPedidos = () => {
+    navegar("/mispedidos");
+   };
 
 
    const [anchorEl, setAnchorEl] = useState(null);
@@ -86,7 +89,7 @@ export const Navbar = () => {
                         </Typography>
                          <AccountCircleIcon /> 
                         <MenuItem onClick={handleClose}>PPPerfil Usuario</MenuItem>
-                        <MenuItem onClick={handleClose}>Mis Pedidos</MenuItem>
+                        <MenuItem onClick={goMisPedidos}>Mis Pedidos</MenuItem>
                         <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         
                         </div>
@@ -131,7 +134,7 @@ export const Navbar = () => {
                             sx={{ display: { xs: "none", md: "inline-flex" } }}
                         >
                             <MenuItem onClick={handleClose}>Perfil Usuariooo</MenuItem>
-                            <MenuItem onClick={handleClose}>Mis Pedidosss</MenuItem>
+                            <MenuItem onClick={goMisPedidos}>Mis Pedidosss</MenuItem>
                             <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         </Menu> 
                         </>

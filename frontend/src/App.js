@@ -10,6 +10,7 @@ import { RegistroView } from './vistas/RegistroView';
 import { DatosEnvioView } from './vistas/DatosEnvioView';
 import { GenerarPedidoView } from './vistas/GenerarPedidoView';
 import { PedidoView } from './vistas/PedidoView';
+import { HistorialPedidoView } from './vistas/HistorialPedidoView';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/envio" element={<DatosEnvioView />} />
       <Route path="/pedido" element={<GenerarPedidoView />} />
       <Route path="/pedido/:id" element={<PedidoView />} />
+      <Route path="/mispedidos" element={<HistorialPedidoView />} />
       <Route path="/producto/:txtProduct" element={<ProductoView />} />
     
     </Routes>

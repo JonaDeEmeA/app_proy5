@@ -4,7 +4,7 @@ import express from "express";
 //const User = require ('../models/userModels.js');
 import data from '../data.js';
 import { Producto } from "../models/productoModel.js";
-import User from '../models/userModels.js';
+import {User} from '../models/userModels.js';
 
 const seedRouter = express.Router();
 

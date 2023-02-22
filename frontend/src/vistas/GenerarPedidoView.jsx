@@ -41,13 +41,13 @@ export const GenerarPedidoView = () => {
   carro.valorEnvio = carro.valorItem > 100 ? redondeo2(0) : redondeo2(10);
   carro.valorIVA = redondeo2(0.19 * carro.valorItem);
   carro.valorTotal = carro.valorItem + carro.valorEnvio + carro.valorIVA;
-
+  
   const handlerConfirmarPedido = async () => {
     
     try {
       
       dispatch({ type: "CREATE_PEDIDO" });
-      //console.log(infoUser.name);
+      
       
       const { data } = await Axios.post("/api/pedidos",
         {
@@ -57,17 +57,17 @@ export const GenerarPedidoView = () => {
           valorEnvio: carro.valorEnvio,
           valorIVA: carro.valorIVA,
           valorTotal: carro.valorTotal,
-          //user: infoUser.name
+          idUsuario: infoUser._id
           
+             
         } ,
         {
           headers: {
             authorization: `Bearer ${infoUser.token}`,
           },
         }
-        
       );
-
+        console.log(infoUser._id);
       
       ctxDispatch({ type: "RESET_CARRO" });
       dispatch({ type: "CREATE_PEDIDO_SUCCESS" });

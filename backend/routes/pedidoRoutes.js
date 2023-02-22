@@ -2,10 +2,10 @@
 import express from "express";
 import data from '../data.js';
 import Pedido from '../models/pedidoModel.js';
-import User from '../models/userModels.js';
+import {User} from '../models/userModels.js';
 
 import expressAsyncHandler from 'express-async-handler';
-import isAuth from './utils.js';
+import {isAuth} from './utils.js';
 
 
 const pedidoRouter = express.Router();
@@ -18,17 +18,23 @@ pedidoRouter.post("/", expressAsyncHandler(async (req, res)=>{
         valorEnvio: req.body.valorEnvio,
         valorIVA: req.body.valorIVA,
         valorTotal: req.body.valorTotal,
-        //user: req.usuario._id
+        idUsuario: req.body.idUsuario
     });
 
-     //console.log(`valores de llegada ${newPedido.valorEnvio}`);
+     //console.log(`valores de llegada ${newPedido}`);
 
     const pedido = await newPedido.save();
-    res.status(201).send({message: "Nuevo Pedido Creado", pedido});
+    res.status(201).send({message: "Nuevo Pedido Creado", pedido });
 })
 
 );
 
+pedidoRouter.get("/propio",
+  expressAsyncHandler(async (req, res)=>{
+    const pedidos = await Pedido.find({idUsuario: req.body.idUsuario});
+    res.send(pedidos);
+  })
+)
 
 pedidoRouter.get("/:id", expressAsyncHandler(async (req, res)=>{
   const pedido = await Pedido.findById(req.params.id);

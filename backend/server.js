@@ -8,10 +8,10 @@ import productoRouter from './routes/productoRoute.js';
 import pedidoRouter from './routes/pedidoRoutes.js';
 
 
+
 dotenv.config();
 
-mongoose
- .connect(process.env.MONGODB_URI).then(()=>{
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
     console.log('Conectado a la BD')
 }).catch(err=>{
   console.log(err.message)
