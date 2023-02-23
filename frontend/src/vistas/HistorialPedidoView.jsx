@@ -52,17 +52,39 @@ export const HistorialPedidoView = () => {
     error: ""
   });
   
+  const handleDelPedido = async () => {
+    dispatch({ type: "FETCH_REQUEST" });
+    try {
+      const { data } = await axios.delete(
+        "/api/pedidos/propio",
+     
+        { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id }}
+      );
+      console.log(`pedidos : ${data}`);
+      dispatch({ type: "FETCH_SUCCESS", payload: data });
+      
+    } catch (error) {
+      dispatch({
+        type: "FETCH_FAIL",
+        payload: getError(error)
+      })
+    }
+    
+  };
 
   useEffect(() => {
+    
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
           "/api/pedidos/propio",
-          { headers: { authorization: `Bearer ${infoUser.token}` } }
+       
+          { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id }}
         );
-        
+        console.log(`pedidos : ${data}`);
         dispatch({ type: "FETCH_SUCCESS", payload: data });
+        
       } catch (error) {
         dispatch({
           type: "FETCH_FAIL",
@@ -71,11 +93,14 @@ export const HistorialPedidoView = () => {
       }
       
     };
-    console.log(`pedidos : ${infoUser._id}`);
+
+   
+    
     fetchData();
+    
   }, [infoUser])
 
-  
+  console.log(pedidos);
   return (
     <>
      <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
@@ -117,6 +142,13 @@ export const HistorialPedidoView = () => {
                   onClick={()=>{navigate(`/pedido/${pedido._id}`)}}
                   variant="contained" color="success">
                   Detalles
+                </Button>
+                  <Button
+                  type="button"
+                  // disabled={carro.carroItems.length === 0}
+                  onClick={handleDelPedido}
+                  variant="contained" color="success">
+                  Borrar
                 </Button>
                   </TableCell>
                 </TableRow>

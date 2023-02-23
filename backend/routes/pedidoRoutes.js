@@ -8,6 +8,7 @@ import expressAsyncHandler from 'express-async-handler';
 import {isAuth} from './utils.js';
 
 
+
 const pedidoRouter = express.Router();
 
 pedidoRouter.post("/", expressAsyncHandler(async (req, res)=>{
@@ -29,12 +30,20 @@ pedidoRouter.post("/", expressAsyncHandler(async (req, res)=>{
 
 );
 
+
 pedidoRouter.get("/propio",
   expressAsyncHandler(async (req, res)=>{
-    const pedidos = await Pedido.find({idUsuario: req.body.idUsuario});
-    res.send(pedidos);
+    const filter = {idUsuario : req.headers.idusuario}
+    const pedidos = await Pedido.find(filter);
+    
+    if (pedidos) {
+      res.send(pedidos);
+    } else {
+      res.status(404).send({ message: "No hay Pedidos" })
+    };
+    
   })
-)
+);
 
 pedidoRouter.get("/:id", expressAsyncHandler(async (req, res)=>{
   const pedido = await Pedido.findById(req.params.id);
@@ -65,6 +74,20 @@ expressAsyncHandler(async (req, res)=>{
     res.status(404).send({ message: "Pedido No Econtrado" });
   };
 })
+);
+
+pedidoRouter.delete("/propio",
+  expressAsyncHandler(async (req, res)=>{
+    const filter = {idUsuario : req.headers.idusuario}
+    const pedidos = await Pedido.deleteOne(filter);
+    
+    if (pedidos) {
+      res.send(pedidos);
+    } else {
+      res.status(404).send({ message: "No hay Pedidos" })
+    };
+    
+  })
 );
 
 

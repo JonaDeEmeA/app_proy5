@@ -236,7 +236,12 @@ useEffect(()=>{
                 ))}
 
               </List>
-              <Link to="/envio" >Editar</Link>
+              {pedido.pagado ? (
+                ""
+              ) : (
+                <Link to="/envio" >Editar</Link>
+              )}
+              
             </Card>
           </ListItem>
         </List>
