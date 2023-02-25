@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/JonaDeEmeA/app_proy5/issues"
   },
-  "homepage": "https://github.com/JonaDeEmeA/app_proy5#readme"
+  "homepage": "https://github.com/JonaDeEmeA/app_proy5#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "path": "^0.12.7"
+  }
 }

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 //import data from './data.js';
-import path, { dirname } from 'path';
+import path from 'path';
 import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import userRouter from './routes/userRoutes.js';
@@ -12,7 +12,7 @@ import pedidoRouter from './routes/pedidoRoutes.js';
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI).then(()=>{
+mongoose.connect(process.env.MONGODB_URI_ATLAS).then(()=>{
     console.log('Conectado a la BD')
 }).catch(err=>{
   console.log(err.message)
