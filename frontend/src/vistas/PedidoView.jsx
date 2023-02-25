@@ -3,12 +3,14 @@ import { useContext, useEffect, useReducer } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
-
+import { PasosCompra } from "../componentes/PasosCompra";
 import { CarroContext } from "../contexto/CarroContext";
 import { getError } from "../utils.js";
 
 import { Grid, Box, Button, TextField, Typography, ListItem, List, Card } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
 
 const reducer = (state, action) => {
 
@@ -158,144 +160,129 @@ useEffect(()=>{
     alert(error)
   ) : (
 
-    <Box display="flex" flexDirection='column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
-    
-    <Grid container mt={4} p={0}
-      height="70%"
-      justifyContent="center"
-      alignItems='baseline'
-      sx={{ bgcolor: "white", borderRadius: 3, width: { xs: "80%", md: "70%" } }}>
-      <Grid item xs={12} md={8}>
-        <List sx={{ width: "100%" }} >
-          <ListItem p={0}>
-            <Card sx={{ width: "100%" }} >
-              <Typography variant="h5" gutterBottom>
-                Pedido N° {pedidoId}
-              </Typography>
-              <Typography variant="subtitle1">
-                <strong>Nombre:</strong> {pedido.direccionEnvio.nombre} <br />
-                <strong>Direccion:</strong> {pedido.direccionEnvio.direccion},
-                {pedido.direccionEnvio.ciudad}, {pedido.direccionEnvio.comuna},
-                
-
-
-
-              </Typography>
-              <Typography>
-                <strong>Telefono:</strong> {pedido.direccionEnvio.fono} <br />
-                {pedido.enviado ? (
-                  <strong>Enviado a {pedido.enviadoEn}</strong>
-                ) : (
-                  <strong>No enviado</strong>
-                )}
-              </Typography>
-            </Card>
-          </ListItem>
-          <ListItem>
-            <Card>
-            <Typography variant="h5" gutterBottom>
-                Info Pago
-              </Typography>
-              {pedido.pagado ? (
-                <h5>Pagado en {pedido.pagadoEn}</h5>
-              ) : (
-                <h5>No Pagado</h5>
-              )}
-            </Card>
-          </ListItem>
-          <ListItem >
-            <Card sx={{ width: "100%" }}>
-              <Typography variant="h5" gutterBottom>
-                Items
-              </Typography>
-              <List>
-
-                {pedido.itemsPedido.map(item => (
-
-
+    <Box display="flex" flexDirection="column" alignItems='center' justifyContent="space-evenly"  sx={{ minHeight: "87vh" }}>
+    <PasosCompra pasos={3} />
+    <Grid container  sx={{
+          maxWidth: { sx: "90%", md: "70%" },
+          justifyContent: { xs: "center", md: "space-evenly" }
+        }}>
+      <Grid  item xs={10} md={8} sx={{ mb: { xs: 2, md: 0 }, }}>
+      <Card sx={{ height: "100%", borderRadius: 2 }} >
+            <List>
+              {pedido.itemsPedido.map(item => (
+                <>
                   <ListItem key={item._id}>
-
-                    <Grid container >
-
-                      <Grid item xs={3} display="flex"  >
-
+                    <Grid container display="flex" justifyContent="space-between" alignItems='center' >
+                      <Grid item xs={2}  >
                         <Avatar alt={item.name} src={item.image}
                           sx={{ width: 70, height: 70 }} />
-                        <Link to={`/producto/${item.txtProduct} `} >{item.name}</Link>
-                        <span>{item.cantidad}</span>
-                        <span>{item.price}</span>
                       </Grid>
-
-
-
+                      <Grid item xs={4}>
+                        <Typography textAlign="left">
+                          <Link to={`/producto/${item.txtProduct} `} >{item.name}</Link>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={3}  >
+                        <Typography>{`X ${item.cantidad}`}</Typography>
+                        <Typography>{`$${item.price * item.cantidad}`}</Typography>
+                      </Grid>
                     </Grid>
-
                   </ListItem>
+                  <Divider />
+                </>
+              ))}
+            </List>
 
-
-                ))}
-
-              </List>
-              {pedido.pagado ? (
-                ""
-              ) : (
-                <Link to="/envio" >Editar</Link>
-              )}
-              
-            </Card>
-          </ListItem>
-        </List>
+          </Card>
 
       </Grid>
-      <Grid item xs={12} md={3}>
-        <Card>
-          <Typography variant="h5" gutterBottom>
-            Resumen
-          </Typography>
-          <List>
-            <ListItem>
-              <Typography variant="h5" gutterBottom>
-                <span>Productos {pedido.valorItem.toFixed(2)}</span>
+      <Grid item xs={10} md={3}  >
+          <Card sx={{ height: "100%", borderRadius: 2 }} >
+            <Grid item mx={2} mb={2} display="flex" flexDirection="column" justifyContent="center" sx={{ mt: { xs: 1, md: 3 } }}>
+
+
+              <Typography variant="h5" textAlign="center" gutterBottom>
+                Estado de Pago
+              </Typography>
+              {pedido.pagado ? (
+                                 
+                  <Chip label="Pagado" color="success" />
+                
+                //<h5>Fecha {pedido.pagadoEn}</h5>
+              ) : (
+                <Chip label="No pagado" color="error" />
+               
+              )}
+
+             
+
+            </Grid>
+            <Divider />
+            <Grid item mx={2} sx={{ mt: { xs: 1, md: 3 } }}>
+
+
+              <Typography variant="h5" textAlign="center" gutterBottom>
+                Datos de envio
               </Typography>
 
-            </ListItem>
-            <ListItem>
-              <span>Envio{pedido.valorEnvio.toFixed(2)}</span>
-            </ListItem>
-            <ListItem>
-              <span>IVA{pedido.valorIVA.toFixed(2)}</span>
+              <Typography mb={2}>
+                <strong>Nombre:</strong> {pedido.direccionEnvio.nombre} <br />
+                <strong>Direccion:</strong> {pedido.direccionEnvio.direccion},
+                {pedido.direccionEnvio.ciudad}, {pedido.direccionEnvio.comuna},<br />
+                <strong>Telefono:</strong> {pedido.direccionEnvio.fono}
+              </Typography>
 
-            </ListItem>
-            <ListItem>
-              <span>Total{pedido.valorTotal.toFixed(2)}</span>
+            </Grid>
+            <Divider />
+            <Grid item mx={2} sx={{ mt: { xs: 1, md: 3 } }}>
 
-            </ListItem>
-            {!pedido.pagado && (
-              <ListItem>
+              <Typography variant="h5" textAlign="center" gutterBottom>
+                Resumen
+              </Typography>
+
+
+              <Typography mb={3} >
+                <strong>Subtotal:</strong> {pedido.valorItem.toFixed(2)}<br />
+                <strong>IVA:</strong>  {pedido.valorIVA.toFixed(2)}<br />
+                <strong>Total:</strong>  {pedido.valorTotal.toFixed(2)}
+              </Typography>
+
+            </Grid>
+            <Divider />
                 
-               
-                {pendiente ? ( 
-                  <h5>...cargando</h5>
-                ) : (
-                  
-                    <PayPalButtons
+            {!pedido.pagado && (
+              <Grid item mx={2} sx={{ mt: { xs: 1, md: 3 } }}>
+
+              {pendiente ? (<h5>...Cargando</h5>) : (
+                <PayPalButtons
                       createOrder={createOrder}
                       onApprove={onApprove}
                       onError={onError}>
                       </PayPalButtons>
-                  
-                )}
-                {loadingPay && <h5>...cargando</h5>}
-              </ListItem>
-            )}
-            
-          </List>
-        </Card>
+              )}
+              {loadingPay && <h5>...Cargando</h5>}
+              </Grid>)}
 
-      </Grid>
+
+
+            
+
+          
+              
+
+
+              
+
+
+            
+          </Card>
+        </Grid>
+      
 
 
     </Grid>
   </Box >
   );
 }
+
+

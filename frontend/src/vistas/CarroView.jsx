@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Box} from "@mui/material";
+import { Grid, Box, Typography} from "@mui/material";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -13,6 +13,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Avatar from '@mui/material/Avatar';
+
 
 import { BtnGeneral } from '../componentes/BtnGeneral';
 
@@ -27,7 +28,7 @@ export const CarroView = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(CarroContext);
   const { carro: { carroItems } } = state;
-  console.log(carroItems);
+  //console.log(carroItems);
   
 
   const handlerUpdateCarro = async (item, cantidad) =>{
@@ -63,14 +64,13 @@ export const CarroView = () => {
         <title>Carro de Compras</title>
        
       </Helmet> */}
-      <h2>Carro de Compras</h2>
+      {/* <h2>Carro de Compras</h2> */}
 
-      <Box display="flex" justifyContent="center" alignItems='flex-start' sx={{ height: "94vh" }}>
+      <Box display="flex" alignItems='center' sx={{ minHeight: "87vh" }}>
+        <Grid  container justifyContent="center" >
 
-        <Grid width="80%" container justifyContent="center"
-          sx={{ bgcolor: "success.main" }} >
-
-          <Grid item xs={12} md={5} sx={{ bgcolor: "primary.main", }}>
+          <Grid item xs={10} md={6} >
+          <Card elevation={8} sx={{ borderRadius: 3 }} >
             {carroItems.length === 0 ? (
                <Alert severity="warning">
                <AlertTitle>Alerta</AlertTitle>
@@ -85,24 +85,27 @@ export const CarroView = () => {
                     
                     <ListItem key={item._id}>
 
-                      <Grid container >
+                      <Grid container display="flex" alignItems='center' >
 
-                        <Grid item xs={3} display="flex"  >
+                        <Grid item xs={2} >
 
                           <Avatar alt={item.name} src={item.image}
                           sx={{ width: 70, height: 70 }} />
                          
                         </Grid>
                         
-                        <Grid item xs={9} my={1} display="flex" justifyContent='center'  >
+                        <Grid item xs={10} my={1} >
                           <Grid container
                             alignItems='center'
+                            justifyContent="end"
                           >
-                            <Grid item xs={12} lg={4} textAlign='center' mb={1}  >
+                            <Grid item xs={3} lg={4} textAlign='center'   >
+                              <Typography>
                               <Link to={`/producto/${item.txtProduct}`} > {item.name} </Link>
+                              </Typography>
                             </Grid>
 
-                            <Grid item xs={12} lg={8} display="flex"
+                            <Grid item xs={8} lg={8} display="flex"
                               justifyContent={{ xs: "center", md: "space-evenly" }}
 
 
@@ -111,53 +114,49 @@ export const CarroView = () => {
                               onClick={()=> handlerUpdateCarro(item, item.cantidad -1)}>
                                 <RemoveCircleIcon />{" "}
                               </IconButton>
-                              <span>{item.cantidad}</span>{" "}
+                              <Typography>{item.cantidad}</Typography>{" "}
                               <IconButton aria-label="add" disabled={item.cantidad === item.inStock}
                               onClick={()=> handlerUpdateCarro(item, item.cantidad +1)}>
                                 <AddCircleIcon />
                               </IconButton>
-                              ${item.price}
+                              <Typography>
+                              ${item.price * item.cantidad}
+                              </Typography>
                               <IconButton aria-label="erase"
                               onClick={()=> handlerDeleteItem(item)}>
                                 <DeleteIcon />
                               </IconButton>
                             </Grid>
-
                           </Grid>
+                            <Divider />
                         </Grid>
-
                       </Grid>
-                      
-                    </ListItem> 
-                    
-                    
-                  ))}
-                  
+                    </ListItem>  
+                    ))}
                 </List>
               )}
-
+            </Card>
           </Grid>
-          <Grid item xs={12} md={3} ml={{ xs: 0, md: 5 }} sx={{ bgcolor: "error.main" }} >
-
-            <Card   >
-              <CardContent sx={{ textAlign: 'center' }} >
-                <h3 >
+          <Grid item xs={10}   md={3} ml={{ xs: 0, md: 5 }}   
+          sx={{ mt: {xs : 3, md: 0}}} >
+          <Card elevation={8} sx={{ borderRadius: 3, height: "170px" }} >
+            
+              
+                <Typography textAlign="center" variant="h5" my={4}>
                   SubTotal ({carroItems.reduce((a, c) => a + c.cantidad, 0)}{" "}
                   items) : ${carroItems.reduce((a, c) => a + c.price * c.cantidad, 0)}
-                </h3>
+                </Typography>
 
                 <BtnGeneral color="warning" nombreBtn="ir a Pagar" 
                 size="small" bool={carroItems.length === 0} 
                 accion={handlerGoPagar} />
-              </CardContent>
-
             </Card>
 
+        
           </Grid>
 
 
         </Grid>
-
       </Box>
     </>
   )

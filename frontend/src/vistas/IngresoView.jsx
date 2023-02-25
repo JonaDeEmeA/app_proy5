@@ -70,11 +70,6 @@ export const IngresoView = () =>{
           Ingreso
         </Typography>
 
-        
-          {/* <InputLabel htmlFor="my-input">Email address</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" />
-          <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-
           <TextField onChange={(e)=> setEmail(e.target.value)}
           fullWidth id="outlined-basic" label="Email" variant="outlined" />
         
@@ -89,8 +84,8 @@ export const IngresoView = () =>{
           variant="outlined" sx={{ mb: 2 }} />
           
           
-        <Button type="submit" variant="contained">Ingresar</Button>
-        <Typography ml={2} variant="body2" align="center" gutterBottom>
+        <Button type="submit" variant="contained" color="warning">Ingresar</Button>
+        <Typography variant="body2" align="center" gutterBottom>
           Nuevo Registro{" "}
           <Link to={`/registro?redirect=${redirect}`} >Crea tu cuenta Kymani</Link>
         </Typography>

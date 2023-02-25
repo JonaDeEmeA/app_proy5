@@ -1,18 +1,13 @@
 
 import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+
 
 import { Grid, Box, Typography, Button, createTheme } from "@mui/material";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+
 import { useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
-
-import Calificacion from "../componentes/Calificacion"
-import { BtnGeneral } from '../componentes/BtnGeneral';
 import { CarroContext } from "../contexto/CarroContext";
 
 
@@ -63,140 +58,132 @@ export const ProductoView = () => {
     fetchData();
   }, [txtProduct]);
 
-  
-   const {state, dispatch: ctxDispatch} = useContext(CarroContext);
-   const {carro} = state;
-  
-   
-   
-   const handlerAddCarro= async () =>{
+
+  const { state, dispatch: ctxDispatch } = useContext(CarroContext);
+  const { carro } = state;
+
+
+
+  const handlerAddCarro = async () => {
 
     //si el producto actual existe en el carro o no
-    const itemExsite = carro.carroItems.find(e => e._id === producto._id) ;
+    const itemExsite = carro.carroItems.find(e => e._id === producto._id);
 
     //si existe se imcrementa la cantidad en uno, si no, la cantidad sera 1, 
     const cantidad = itemExsite ? itemExsite.cantidad + 1 : 1;
 
     //consulta al producto actual. Se controla que la cantidad de items del producto actual, en el carro, no sea menor que cantidad en stock. 
-    const {data} = await axios.get(`/api/productos/${producto._id}`);
-    
+    const { data } = await axios.get(`/api/productos/${producto._id}`);
+
     try {
       if (data.inStock < cantidad) {
         window.alert("Lo sentimos. El producto no tiene stock");
         return;
       }
-    } catch(e){
+    } catch (e) {
       console.log(e)
     }
-
-    
-    
-    
     //console.log("data");
-     
+
     //console.log(itemExsite);
     //console.log(cantidad);
-     ctxDispatch({
+    ctxDispatch({
       type: "ADD_ITEM_CARRO",
-      payload: {...producto, cantidad},
-      
-     });
+      payload: { ...producto, cantidad },
 
-     navigate("/carro");
-     
-   };
+    });
 
-   
+    navigate("/carro");
+
+  };
+
+
 
   return (
-    
+
     loading ? (
-    <div>Cargando...</div>
-  ) : error ? (
-    <div>{error}</div>
-  ) : (
-    
-    <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "94vh" }}>
-  
-      <Grid width="80%" container justifyContent="center"
-        sx={{
-          bgcolor: "success.main",}} >
+      <div>Cargando...</div>
+    ) : error ? (
+      <div>{error}</div>
+    ) : (
+
+      <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "94vh" }}>
+        <Card elevation={8} sx={{ maxWidth: "85%", borderRadius: 3 }} >
+          <Grid container
+            sx={{
+              alignItems: 'center',
+              justifyContent: { xs: "center", md: "space-between" },
+            }} >
 
 
-        <Grid item  xs={12} sm={5} display="flex" sx={{ bgcolor: "primary.main", justifyContent: 'center' }}>
+            <Grid item xs={12} sm={5} display="flex" sx={{ justifyContent: 'center' }}>
+              <img className="item-img" src={producto.image} alt={producto.name}></img>
+            </Grid>
 
-          <img className="large-img" src={producto.image} alt={producto.name}></img>
+            <Grid item mt={3} xs={12} sm={3}
+              sx={{ borderBottom: { xs: 1, md: 0 }, maxWidth: "85%" }}>
+              <Typography
+                gutterBottom
+                align="center"
+                id="basic-list-demo"
+                variant="h3"
+                textTransform="uppercase"
+                fontWeight="lg"
+              >
+                {producto.name}
+              </Typography>
+              <Typography variant="overline">
+                {producto.description}
+              </Typography>
+            </Grid>
 
-        </Grid>
-        <Grid item xs={12} sm={4} sx={{ bgcolor: "error.main" }}>
-          
-          <Typography
-            id="basic-list-demo"
-            level="body3"
-            textTransform="uppercase"
-            fontWeight="lg"
-          >
-            DESCRIPCION
-          </Typography>
-          <List aria-labelledby="basic-list-demo">
-            <ListItem><h1>{producto.name}</h1></ListItem>
-            {/* <Calificacion numRating={producto.rating} /> */}
-            <ListItem>Valor : ${producto.price}</ListItem>
-            <ListItem>{producto.description} </ListItem>
-          </List>
+            <Grid item py={5} xs={12} sm={2} xl={2}
+              sx={{
+                maxWidth: "50%",
+                borderLeft: { xs: 0, md: 1 },
+                marginRight: { xs: 0, md: 5 },
+                pl: { xs: 0, md: 5 }
+              }}>
 
-        </Grid>
-        <Grid   item xs={12} sm={3} xl={2}>
-          
-         
-              
-              <Grid container height="100%" display="flex" justifyContent= 'center' alignContent= 'center' >
+              <Grid container height="100%" display="flex" justifyContent='center' alignContent='center' >
                 <Grid item xs={6} sm={6}>
-              <Typography  sx={{ fontSize: 18 }} color="text.secondary" >
-                 Valor : 
-              </Typography>
-              </Grid>
-              
-              
-              <Grid item xs={6} sm={6}> 
-              <Typography  variant="h5" component="div">
-              ${producto.price}
-              </Typography>
-              </Grid>
-              
+                  <Typography sx={{ fontSize: 18 }} color="text.secondary" >
+                    Valor :
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={6} sm={6} textAlign="right">
+                  <Typography variant="h5" component="div">
+                    ${producto.price}
+                  </Typography>
+                </Grid>
+
                 <Grid item xs={6} sm={6}>
-              <Typography  sx={{ fontSize: 18 }} color="text.secondary" >
-                Status: 
-              </Typography>
-              </Grid>
-              
-              
-              <Grid item xs={6} sm={6}> 
-              {producto.inStock >0 ? (
+                  <Typography sx={{ fontSize: 18 }} color="text.secondary" >
+                    Status:
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={6} sm={6} textAlign="right">
+                  {producto.inStock > 0 ? (
                     <Chip label="En Stock" color="success" />
                   ) : (
-                    <Chip label="Sin Stock" color="error"/> 
+                    <Chip label="Sin Stock" color="error" />
                   )}
+                </Grid>
+                {producto.inStock > 0 && (
+                  <Grid mt={2} item xs={12} >
+                    <Button type="submit" fullWidth variant="contained" color="warning" onClick={handlerAddCarro}>Agregar</Button>
+                  </Grid>
+                )
+                }
               </Grid>
+            </Grid>
 
-              
-              {producto.inStock > 0 && (
-                 <Grid  pb={3} mt={2} item xs={12} > 
-                  <BtnGeneral color="warning" nombreBtn="Agregar" accion={handlerAddCarro}/>
-                  </Grid> 
-                  )}
-              
-              
-             
-              </Grid>  
-
-       
-        </Grid>
-
-      </Grid>
-    
-    </Box>
-  )
+          </Grid>
+        </Card>
+      </Box>
+    )
 
   )
 

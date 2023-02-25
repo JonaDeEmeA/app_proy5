@@ -5,7 +5,7 @@ export const Footer =()=>{
 
   return (
     <footer>
-      <Box sx={{bgcolor: "common.black", height:"6.4vh" }} > 
+      <Box sx={{bgcolor: "common.black", height:"63px" }} > 
         
           <Grid container sx={{justifyContent: "center"}}>
             <Grid item mt={2}>
