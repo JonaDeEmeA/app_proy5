@@ -11,13 +11,15 @@ import { DatosEnvioView } from './vistas/DatosEnvioView';
 import { GenerarPedidoView } from './vistas/GenerarPedidoView';
 import { PedidoView } from './vistas/PedidoView';
 import { HistorialPedidoView } from './vistas/HistorialPedidoView';
+import { HomeView } from './vistas/HomeView';
 
 function App() {
   return (
     <>
     <Navbar />
     <Routes>
-      <Route path="/" element={<InicioView />} />
+      <Route path="/" element={<HomeView />} />
+      <Route path="/productos" element={<InicioView />} />
       <Route path="/carro" element={<CarroView />} />
       <Route path="/ingreso" element={<IngresoView />} />
       <Route path="/registro" element={<RegistroView />} />

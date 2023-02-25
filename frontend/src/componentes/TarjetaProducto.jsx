@@ -28,7 +28,6 @@ export default function TarjetaProducto(props) {
        const {data} = await axios.get(`/api/productos/${item._id}`);
        console.log(`desde axios ${data.inStock} y cantidad = ${cantidad}`);
        if (data.inStock < cantidad) {
-        console.log("AAAAA");
         window.alert("Lo sentimos. El producto no tiene stock");
         return;
       };
@@ -48,7 +47,7 @@ export default function TarjetaProducto(props) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minWidth: 250 }}>
       <CardActionArea txtproducto={props.txtProducto} onClick={props.accion}>
         <CardMedia
           component="img"
@@ -89,20 +88,3 @@ export default function TarjetaProducto(props) {
   );
 }
 
-/*
- {props.item.inStock === 0 ? (
-          <Button size="small" 
-          color="success" 
-          variant="contained"  >
-            Sin Stock
-          </Button>
-        ) : (
-          <Button size="small" 
-          color="success" 
-          variant="contained" 
-          startIcon={<ShoppingCartIcon />} 
-          onClick={()=>handlerAddToCarro(props.item)} >
-            Agregar
-          </Button>
-        )}
-*/

@@ -59,14 +59,11 @@ export const DatosEnvioView = () => {
     
     <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
       <PasosCompra pasos={1}/>
-      <Grid component="form" onSubmit={handlerSubmit} container mt={4} p={4} 
-
-        height="70%"
-        alignItems='baseline'
+      <Grid   justifyContent="center" component="form" onSubmit={handlerSubmit} container mt={4} p={4} height="70%"
         sx={{ bgcolor: "white", borderRadius: 3, width: { xs: "80%", md: "40%" } }}>
 
 
-        <Typography variant="h5" align="left" gutterBottom>
+        <Typography mb={3} variant="h5" align="left" gutterBottom>
           Datos de envio
         </Typography>
 
@@ -114,13 +111,7 @@ export const DatosEnvioView = () => {
           variant="outlined" sx={{ mb: 2 }} />
 
 
-        <Button type="submit" variant="contained">Continuar</Button>
-        {/* <Typography ml={2} variant="body2" align="center" gutterBottom>
-          Nuevo Registro{" "}
-          <Link to={`/registro?redirect=${redirect}`} >Crea tu cuenta Kymani</Link>
-        </Typography> */}
-
-
+        <Button type="submit" color="success" variant="contained">Continuar</Button>
 
       </Grid>
     </Box >

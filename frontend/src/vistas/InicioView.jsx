@@ -55,19 +55,15 @@ export const InicioView = () => {
   const goNavegar = (e) => {
 
     let atributo = e.currentTarget.getAttribute("txtproducto");
-    //console.log(atributo);
-    navegar(`producto/${atributo}`)
+    console.log(atributo);
+    navegar(`/producto/${atributo}`)
 
   }
 
   return (
     <>
-
-
-      <Box component="main" className="contenedor"
-        sx={{
-          display: 'flex',
-        }} >
+      <Box component="main" 
+        display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }} >
         <Grid container sx={{ justifyContent: 'space-around' }} >
           {loading ? (<div>Cargando...</div>) :
             error ? (<div>{error}</div>) : (
@@ -86,8 +82,6 @@ export const InicioView = () => {
                 </Grid>
               ))
             )}
-
-
         </Grid>
       </Box>
 

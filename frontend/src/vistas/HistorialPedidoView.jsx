@@ -118,7 +118,6 @@ export const HistorialPedidoView = () => {
                 <TableCell align="right">FECHA</TableCell>
                 <TableCell align="right">TOTAL</TableCell>
                 <TableCell align="right">PAGO</TableCell>
-                <TableCell align="right">ENVIO</TableCell>
                 <TableCell align="right">ACCION</TableCell>
               </TableRow>
             </TableHead>
@@ -134,7 +133,6 @@ export const HistorialPedidoView = () => {
                   <TableCell align="right">{pedido.createdAt.substring(0,10)}</TableCell>
                   <TableCell align="right">{pedido.valorTotal.toFixed(2)}</TableCell>
                   <TableCell align="right">{pedido.pagado ? pedido.pagadoEn.substring(0,10) : "No"}</TableCell>
-                  <TableCell align="right">{pedido.enviado ? pedido.enviadoEn.substring(0,10) : "No"}</TableCell>
                   <TableCell align="right">
                   <Button
                   type="button"
