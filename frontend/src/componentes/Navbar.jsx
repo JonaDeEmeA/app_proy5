@@ -80,21 +80,21 @@ export const Navbar = () => {
                     }}
                     sx={{ display: {  md: "none" } }}
                 >
-                    <MenuItem onClick={goHome}>IIInicio</MenuItem>
-                    <MenuItem onClick={goRegistro}>RRRegistrar</MenuItem>
+                    <MenuItem onClick={goHome}>Inicio</MenuItem>
+                    <MenuItem onClick={goRegistro}>Registrar</MenuItem>
                     {infoUser ? (
                         <div>
                         <Typography>
                         {infoUser.name}
                         </Typography>
                          <AccountCircleIcon /> 
-                        <MenuItem onClick={handleClose}>PPPerfil Usuario</MenuItem>
+                        <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem>
                         <MenuItem onClick={goMisPedidos}>Mis Pedidos</MenuItem>
                         <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         
                         </div>
                     ) : (
-                        <MenuItem onClick={goIngreso}>IIIngresar</MenuItem>
+                        <MenuItem onClick={goIngreso}>Ingresar</MenuItem>
                     )}
                     
                     
@@ -108,7 +108,7 @@ export const Navbar = () => {
                     justifyContent: "start",
                     display: { xs: "none", md: "inline-flex" }}}>
                     <Button color="inherit" onClick={goHome}>Inicio</Button>
-                    <Button color="inherit" onClick={goRegistro}>Registrarrr</Button>
+                    <Button color="inherit" onClick={goRegistro}>Registrar</Button>
                     {infoUser ? 
                     (
                         <>                                  
@@ -133,14 +133,14 @@ export const Navbar = () => {
                             }}
                             sx={{ display: { xs: "none", md: "inline-flex" } }}
                         >
-                            <MenuItem onClick={handleClose}>Perfil Usuariooo</MenuItem>
-                            <MenuItem onClick={goMisPedidos}>Mis Pedidosss</MenuItem>
+                            <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem>
+                            <MenuItem onClick={goMisPedidos}>Mis Pedidos</MenuItem>
                             <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         </Menu> 
                         </>
                     ) : 
                     (
-                        <Button onClick={goIngreso} color="inherit">Ingresarrr</Button>
+                        <Button onClick={goIngreso} color="inherit">Ingresar</Button>
                     )}
                     
                     
