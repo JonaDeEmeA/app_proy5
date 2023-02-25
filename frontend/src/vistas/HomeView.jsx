@@ -36,24 +36,19 @@ export const HomeView = () => {
       
       sx={{ 
         
-        width: { xs: "80%", md: "30%" },
+        width: { xs: "90%", md: "40%" },
          }}>
       <Grid item xs={12} md={8}
       sx={{ 
-        bgcolor: "crimson",
+        
         borderColor: 'warning.light',
-        border: 1,
         borderRadius: 3, 
         width: { xs: "80%", md: "30%" },
         height: { xs: "60%", md: "40%" } }}>
-      <Typography   variant="h6" color="white" align="center" >
-          Pura energía para tu día
+      <Typography   variant="h1" color="white" align="center" >
+          <strong>Pura energía para tu día</strong>
         </Typography>
-      <Typography   variant="h6" color="white" align="center" >
-      Vitaminas, minerales, fibra y sabor. Con energía positiva la vida es más linda.
-      Motivate haz el cambio 🌱
-        </Typography>
-        <Button type="submit" fullWidth variant="contained" color="error" size="large" onClick={goProductos}>Ver Productos</Button>
+        <Button type="submit" fullWidth variant="contained" color="warning" size="large" onClick={goProductos}>Ver Productos</Button>
       </Grid>
       
 

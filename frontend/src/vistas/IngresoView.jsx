@@ -58,12 +58,12 @@ export const IngresoView = () =>{
   return (
 
     <Box display="flex" justifyContent="center" alignItems='center' sx={{ height: "87vh" }}>
-      <Grid component="form" onSubmit={handlerSubmit} container p={3} width="80%"
+      <Grid component="form" onSubmit={handlerSubmit} container p={3} 
       
         height="40%"
         justifyContent="center"
         alignItems='baseline'
-        sx={{ bgcolor: "white", borderRadius: 3 }}>
+        sx={{ bgcolor: "white", borderRadius: 3, width:{xs:"80%", md:"40%"} }}>
 
        
         <Typography variant="h5" align="center" gutterBottom>
@@ -84,8 +84,8 @@ export const IngresoView = () =>{
           variant="outlined" sx={{ mb: 2 }} />
           
           
-        <Button type="submit" variant="contained" color="warning">Ingresar</Button>
-        <Typography variant="body2" align="center" gutterBottom>
+        <Button type="submit"  variant="contained" color="warning">Ingresar</Button>
+        <Typography variant="body2" ml={2} align="center" gutterBottom>
           Nuevo Registro{" "}
           <Link to={`/registro?redirect=${redirect}`} >Crea tu cuenta Kymani</Link>
         </Typography>

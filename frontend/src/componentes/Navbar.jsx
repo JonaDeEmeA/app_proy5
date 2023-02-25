@@ -2,6 +2,7 @@ import DiningIcon from "@mui/icons-material/Dining";
 import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, Button, Box } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Divider from '@mui/material/Divider';
 import { useContext, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom"
@@ -82,13 +83,17 @@ export const Navbar = () => {
                 >
                     <MenuItem onClick={goHome}>Inicio</MenuItem>
                     <MenuItem onClick={goRegistro}>Registrar</MenuItem>
+                    
                     {infoUser ? (
+                        
                         <div>
-                        <Typography>
+                        <Divider />
+                        <MenuItem>
                         {infoUser.name}
-                        </Typography>
-                         <AccountCircleIcon /> 
-                        <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem>
+                        <AccountCircleIcon /> 
+                        </MenuItem>
+                         
+                        {/* <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem> */}
                         <MenuItem onClick={goMisPedidos}>Mis Pedidos</MenuItem>
                         <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         
@@ -133,7 +138,7 @@ export const Navbar = () => {
                             }}
                             sx={{ display: { xs: "none", md: "inline-flex" } }}
                         >
-                            <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem>
+                            {/* <MenuItem onClick={handleClose}>Perfil Usuario</MenuItem> */}
                             <MenuItem onClick={goMisPedidos}>Mis Pedidos</MenuItem>
                             <MenuItem onClick={handleSalir}>Salir</MenuItem>
                         </Menu> 

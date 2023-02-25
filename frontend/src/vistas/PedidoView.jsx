@@ -160,15 +160,15 @@ useEffect(()=>{
     alert(error)
   ) : (
 
-    <Box display="flex" flexDirection="column" alignItems='center' justifyContent="space-evenly"  sx={{ minHeight: "87vh" }}>
+    <Box display="flex" flexDirection="column" alignItems='center' justifyContent="space-evenly"  sx={{ height: {xs:"120vh", md:"86.2vh"} }}>
     <PasosCompra pasos={3} />
     <Grid container  sx={{
           maxWidth: { sx: "90%", md: "70%" },
           justifyContent: { xs: "center", md: "space-evenly" }
         }}>
       <Grid  item xs={10} md={8} sx={{ mb: { xs: 2, md: 0 }, }}>
-      <Card sx={{ height: "100%", borderRadius: 2 }} >
-            <List>
+      <Card sx={{ height: "100%", borderRadius: 2 }}   >
+            <List >
               {pedido.itemsPedido.map(item => (
                 <>
                   <ListItem key={item._id}>

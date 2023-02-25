@@ -6,7 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Grid, Box, Button, TextField, Typography, ListItem, List, Card } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import FeedIcon from '@mui/icons-material/Feed';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, Typography } from "@mui/material";
 import { useContext, useEffect, useReducer } from 'react';
 import { CarroContext } from '../contexto/CarroContext';
 import { useNavigate } from 'react-router-dom';
@@ -51,110 +54,114 @@ export const HistorialPedidoView = () => {
     cargando: true,
     error: ""
   });
-  
+
   const handleDelPedido = async () => {
     dispatch({ type: "FETCH_REQUEST" });
     try {
       const { data } = await axios.delete(
         "/api/pedidos/propio",
-     
-        { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id }}
+
+        { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id } }
       );
-      console.log(`pedidos : ${data}`);
-      dispatch({ type: "FETCH_SUCCESS", payload: data });
       
+      dispatch({ type: "FETCH_SUCCESS", payload: data });
+
     } catch (error) {
       dispatch({
         type: "FETCH_FAIL",
         payload: getError(error)
       })
     }
-    
+
   };
 
   useEffect(() => {
+
     
+
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const { data } = await axios.get(
           "/api/pedidos/propio",
-       
-          { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id }}
+
+          { headers: { authorization: `Bearer ${infoUser.token}`, idUsuario: infoUser._id } }
         );
-        console.log(`pedidos : ${data}`);
-        dispatch({ type: "FETCH_SUCCESS", payload: data });
         
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
+
       } catch (error) {
         dispatch({
           type: "FETCH_FAIL",
           payload: getError(error)
         })
       }
-      
+
     };
 
-   
+
     
     fetchData();
-    
+
   }, [infoUser])
 
   console.log(pedidos);
   return (
     <>
-     <Box display="flex" flexDirection= 'column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
-      <h1>Historial Pedidos</h1>
-      {cargando ? (
-        <h5>...Cargando</h5>
-      ) : error ? (
-        alert(error)
-      ) : (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>N° PEDIDO</TableCell>
-                <TableCell align="right">FECHA</TableCell>
-                <TableCell align="right">TOTAL</TableCell>
-                <TableCell align="right">PAGO</TableCell>
-                <TableCell align="right">ACCION</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {pedidos.map((pedido) => (
-                <TableRow
-                  key={pedido._id}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {pedido._id}
-                  </TableCell>
-                  <TableCell align="right">{pedido.createdAt.substring(0,10)}</TableCell>
-                  <TableCell align="right">{pedido.valorTotal.toFixed(2)}</TableCell>
-                  <TableCell align="right">{pedido.pagado ? pedido.pagadoEn.substring(0,10) : "No"}</TableCell>
-                  <TableCell align="right">
-                  <Button
-                  type="button"
-                  // disabled={carro.carroItems.length === 0}
-                  onClick={()=>{navigate(`/pedido/${pedido._id}`)}}
-                  variant="contained" color="success">
-                  Detalles
-                </Button>
-                  <Button
-                  type="button"
-                  // disabled={carro.carroItems.length === 0}
-                  onClick={handleDelPedido}
-                  variant="contained" color="success">
-                  Borrar
-                </Button>
-                  </TableCell>
+      <Box display="flex" flexDirection='column' justifyContent="center" alignItems='center' sx={{ minHeight: "86.6vh" }}>
+        <Typography  variant="h3" gutterBottom>Historial Pedidos</Typography>
+        {cargando ? (
+          <h5>...Cargando</h5>
+        ) : error ? (
+          alert(error)
+        ) : (
+
+          <TableContainer component={Paper} sx={{ minWidth: "90%", maxWidth: "70%" }}>
+            <Table sx={{ minWidth: 650, }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>N° PEDIDO</TableCell>
+
+                  <TableCell align="center">TOTAL</TableCell>
+                  <TableCell align="center">PAGO</TableCell>
+                  <TableCell align="center">DETALLE / BORRAR</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+              </TableHead>
+              <TableBody>
+                {pedidos.map((pedido) => (
+                  <TableRow
+                    key={pedido._id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {pedido._id}
+                    </TableCell>
+                    {/* <TableCell align="center">{pedido.createdAt.substring(0,10)}</TableCell> */}
+                    <TableCell align="center">${pedido.valorTotal}</TableCell>
+                    <TableCell align="center">{pedido.pagado ? pedido.pagadoEn.substring(0, 10) : "No"}</TableCell>
+                    <TableCell align="center" width="300px" display="flex"
+                      sx={{ width: { sx: "100px", md: "200px" }, }}>
+                      <IconButton
+                        sx={{mr:2 }}
+                        color="warning"
+                        onClick={() => { navigate(`/pedido/${pedido._id}`) }}
+                        aria-label="delete">
+                        <FeedIcon />
+                      </IconButton>
+                      <IconButton
+                        sx={{ml:2 }}
+                        color="error"
+                        onClick={() => { navigate(`/pedido/${pedido._id}`) }}
+                        aria-label="delete">
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </Box>
     </>
   )

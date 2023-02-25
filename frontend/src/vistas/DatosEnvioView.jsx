@@ -111,7 +111,7 @@ export const DatosEnvioView = () => {
           variant="outlined" sx={{ mb: 2 }} />
 
 
-        <Button type="submit" color="success" variant="contained">Continuar</Button>
+        <Button type="submit" color="warning" variant="contained">Continuar</Button>
 
       </Grid>
     </Box >

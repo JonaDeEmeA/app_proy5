@@ -91,21 +91,21 @@ export const GenerarPedidoView = () => {
 
   return (
 
-    <Box display="flex" flexDirection="column" alignItems='center' justifyContent="space-evenly" sx={{ minHeight: "87vh" }}>
-      <PasosCompra pasos={2} />
+    <Box display="flex" flexDirection="column" alignItems='center' justifyContent="space-evenly" sx={{ height: {xs:"110vh", md:"86.2vh"} }}>
+      <PasosCompra pasos={2} sx={{ mt:5}}  />
       <Grid container
         sx={{
-          maxWidth: { sx: "90%", md: "70%" },
+          maxWidth: { xs: "100%", md: "70%" },
           justifyContent: { xs: "center", md: "space-evenly" }
         }}>
 
 
-        <Grid item xs={10} md={8} sx={{ mb: { xs: 2, md: 0 }, }}>
+        <Grid item xs={11} md={8} sx={{ mb: { xs: 2, md: 0 }, }}>
           <Card sx={{ height: "100%", borderRadius: 2 }} >
             <List>
               {carro.carroItems.map(item => (
-                <>
-                  <ListItem key={item._id}>
+                <div key={item._id}>
+                  <ListItem >
                     <Grid container display="flex" justifyContent="space-between" alignItems='center' >
                       <Grid item xs={2}  >
                         <Avatar alt={item.name} src={item.image}
@@ -123,14 +123,14 @@ export const GenerarPedidoView = () => {
                     </Grid>
                   </ListItem>
                   <Divider />
-                </>
+                </div>
               ))}
             </List>
 
           </Card>
         </Grid>
         
-        <Grid item xs={10} md={3}  >
+        <Grid item xs={11} md={3}  >
           <Card sx={{ height: "100%", borderRadius: 2 }} >
             <Grid item mx={2} sx={{ mt: { xs: 1, md: 6 } }}>
 
@@ -156,9 +156,9 @@ export const GenerarPedidoView = () => {
 
 
               <Typography mb={3} >
-                <strong>Subtotal:</strong> {carro.valorItem.toFixed(2)}<br />
-                <strong>IVA:</strong>  {carro.valorIVA.toFixed(2)}<br />
-                <strong>Total:</strong>  {carro.valorTotal.toFixed(2)}
+                <strong>Subtotal:</strong> {carro.valorItem}<br />
+                <strong>IVA:</strong>  {carro.valorIVA}<br />
+                <strong>Total:</strong>  {carro.valorTotal}
               </Typography>
 
 
@@ -169,7 +169,7 @@ export const GenerarPedidoView = () => {
                     type="button"
                     disabled={carro.carroItems.length === 0}
                     onClick={handlerConfirmarPedido}
-                    variant="contained" color="success">
+                    variant="contained" color="warning">
                     Confirmar
                   </Button>
                 </Grid>
@@ -179,8 +179,8 @@ export const GenerarPedidoView = () => {
                     type="button"
                     disabled={carro.carroItems.length === 0}
                     onClick={goCarro}
-                    variant="contained" color="success">
-                    Editar Pedido
+                    variant="contained" color="warning">
+                    Editar
                   </Button>
                 </Grid>
               </Grid>

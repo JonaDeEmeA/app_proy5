@@ -105,10 +105,11 @@ export const RegistroView = () =>{
           variant="outlined" sx={{ mb: 2 }} />
           
           
-        <Button type="submit" variant="contained">Registrar</Button>
+        <Button type="submit" variant="contained" color="warning">Registrar</Button>
         <Typography ml={2} variant="body2" align="center" gutterBottom>
           Ya tienes una cuenta?{" "}
-          <Link to={`/signin?redirect=${redirect}`} >Ingresar</Link>
+          <Link to={"/ingreso"} >Ingresar</Link>
+          {/* <Link to={`/signin?redirect=${redirect}`} >Ingresar</Link> */}
         </Typography>
 
 
